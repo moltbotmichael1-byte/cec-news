@@ -7,7 +7,6 @@ Widget de noticias de la Conferencia Episcopal de Colombia.
 - **Widget:** https://cecnews.pages.dev/widget
 - **Landing:** https://cecnews.pages.dev/
 - **API:** https://cecnews.pages.dev/api/news
-- **GitHub:** https://github.com/moltbotmichael1-byte/cec-news
 
 ## Arquitectura
 
@@ -38,15 +37,6 @@ Cloudflare Pages (auto-deploy)
 - `public/index.html` - Landing con generador de iframe
 - `public/functions/api/news.js` - API que sirve las noticias
 - `.github/workflows/update.yml` - Actualización automática
-
-## Actualización manual
-
-```bash
-cd ~/.openclaw/workspace/skills/cec-news
-node scraper.js
-git add -A && git commit -m "Update news"
-git push
-```
 
 ## Licencia
 
