@@ -15,9 +15,11 @@ jobs:
         with:
           node-version: '20'
       
+      - name: Install dependencies
+        run: npm install node-fetch
+      
       - name: Run scraper
-        run: |
-          node scraper.js
+        run: node scraper.js
       
       - name: Copy to public
         run: |
