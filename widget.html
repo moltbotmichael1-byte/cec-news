@@ -248,6 +248,28 @@
             font-weight: 500;
         }
 
+        .ver-mas-btn {
+            display: block;
+            width: 90%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .ver-mas-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 82, 130, 0.4);
+        }
+
         /* Featured Card (First news with video) */
         .news-card.featured {
             grid-column: 1 / -1;
@@ -301,6 +323,10 @@
             Actualizado: <span id="timestamp">-</span>
             <span class="update-badge" id="update-badge">Automático</span></p>
         </div>
+        
+        <a href="https://cec.org.co" target="_blank" class="ver-mas-btn">
+            📰 Ver más noticias en CEC.org.co
+        </a>
     </div>
 
     <script>
