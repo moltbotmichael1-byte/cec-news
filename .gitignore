@@ -1,23 +1,18 @@
 # Dependencies
 node_modules/
 
-# Environment files
-.env
-*.env.local
+# Build artifacts
+.wrangler/
 
-# Backups
-*.bak
-*.tar.gz
-
-# OS
+# OS files
 .DS_Store
-Thumbs.db
+*.bak
 
-# Temp
-*.tmp
-*.log
-tmp/
+# Backup files
+*_backup/
+*.backup
 
-# Unneeded
-public_clean/
-worker.js
+# IDE
+.idea/
+.vscode/
+*.swp
