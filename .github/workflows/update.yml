@@ -1,12 +1,14 @@
-name: Update CEC News
+name: Update and Deploy CEC News
 
 on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
-  update:
+  update-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,3 +35,10 @@ jobs:
           git add public/news-data.json public/images/
           git commit -m "🔄 Update news - $(date '+%Y-%m-%d %H:%M')" || echo "No changes"
           git push
+      
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=cecnews
