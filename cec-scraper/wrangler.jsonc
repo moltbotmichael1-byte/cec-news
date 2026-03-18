@@ -1,0 +1,21 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "cec-scraper",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-03-10",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true
+	},
+	"kv_namespaces": [
+		{
+			"binding": "CEC_NEWS",
+			"id": "7eeb23a2aaa844d88c7ecb1411725253"
+		}
+	],
+	"triggers": {
+		"crons": ["*/30 * * * *"]
+	}
+}

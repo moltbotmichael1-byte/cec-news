@@ -328,7 +328,7 @@
     </div>
 
     <script>
-        // Cargar noticias desde news-data.json
+        // Cargar noticias desde Cloudflare Worker (actualiza cada 30 min)
         let newsData = [];
         let currentIndex = 0;
         const urlParams = new URLSearchParams(window.location.search);
@@ -338,8 +338,8 @@
 
         async function loadNewsData() {
             try {
-                // Cargar datos directamente desde archivo estático
-                const response = await fetch('/news-data.json');
+                // Cargar datos desde Cloudflare Worker
+                const response = await fetch('https://cec-scraper.moltbotmichael1.workers.dev/news-data.json');
                 if (!response.ok) throw new Error('No se pudieron cargar las noticias');
                 newsData = await response.json();
                 return true;
