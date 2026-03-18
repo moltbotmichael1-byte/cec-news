@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "title": "Iglesia en la frontera colombo-ecuatoriana alerta sobre crisis social y económica y llama al diálogo entre los países",
+    "excerpt": "En medio de las recientes tensiones comerciales y políticas entre Colombia y Ecuador, que han afectado el intercambio económico y el flujo de personas y mercancías en la zona fronteriza, las diócesis de Ipiales y Tulcán hicieron público un comunicado",
+    "date": "17 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia1.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/iglesia-en-la-frontera-colombo-ecuatoriana-alerta-sobre-crisis",
+    "video": "https://www.youtube.com/embed/IWbuFCoWv0E"
+  },
+  {
+    "title": "Monseñor Rubén Darío Jaramillo Montoya asume como noveno obispo de Montería: llama a la fe, la unidad y el desarrollo humano integral",
+    "excerpt": "En una solemne celebración eucarística realizada este sábado 14 de marzo en la Catedral San Jerónimo de Montería, monseñor Rubén Darío Jaramillo Montoya tomó posesión canónica como nuevo obispo de la Diócesis de Montería , convirtiéndose en el noveno",
+    "date": "16 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia2.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/monsenor-ruben-dario-jaramillo-montoya-asume-como-noveno-obispo-de",
+    "video": ""
+  },
+  {
+    "title": "La Iglesia en Colombia proyecta nuevas líneas para su pastoral educativa ante desafíos como la diversidad religiosa, la salud mental y la inteligencia",
+    "excerpt": "Delegados de pastoral educativa de 33 jurisdicciones eclesiásticas del país se reunieron en Bogotá para analizar los desafíos actuales del sistema educativo colombiano y proyectar nuevas líneas de acción pastorales que orienten la presencia de la Igl",
+    "date": "12 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia3.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/la-iglesia-en-colombia-proyecta-nuevas-lineas-para-su-pastoral",
+    "video": "https://www.youtube.com/embed/CV2j6xzcyXk"
+  },
+  {
+    "title": "Bajo el liderazgo del cardenal Rueda, Arquidiócesis de Bogotá fortalece su camino sinodal con la creación de nuevo Consejo de Evangelización",
+    "excerpt": "Bajo el liderazgo del cardenal Luis José Rueda Aparicio, la Arquidiócesis de Bogotá ha puesto en marcha el Consejo Arquidiocesano de Evangelización (CAEV) , un nuevo organismo de participación pastoral que busca fortalecer el discernimiento comunitar",
+    "date": "12 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia4.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/bajo-el-liderazgo-del-cardenal-rueda-arquidiocesis-de-bogota",
+    "video": ""
+  },
+  {
+    "title": "Nueva edición para Colombia del Misal Romano",
+    "excerpt": "Por Mons. Ricardo Tobón Restrepo - En la Ultima Cena que Jesús celebró con sus discípulos, les dio el mandato de “hacer su memoria”. Así instituyó un sacramento que no es sólo un recuerdo de él, sino un acto que lo hace presente y produce la gracia d",
+    "date": "16 de marzo de 2026",
+    "category": "Opinión",
+    "image": "images/noticia5.png",
+    "url": "https://cec.org.co/sistema-informativo/opinion/nueva-edicion-para-colombia-del-misal-romano",
+    "video": ""
+  },
+  {
+    "title": "La Esperanza en Jesucristo no defrauda",
+    "excerpt": "Por Mons. José Libardo Garcés Monsalve - Avanzando en la celebración de los 70 años de vida diocesana con el lema pastoral: vayan y hagan discípulos haciendo la Voluntad de Dios, nos disponemos a reflexionar sobre la virtud de la Esperanza en este it",
+    "date": "9 de marzo de 2026",
+    "category": "Opinión",
+    "image": "images/noticia6.jpg",
+    "url": "https://cec.org.co/sistema-informativo/opinion/la-esperanza-en-jesucristo-no-defrauda",
+    "video": ""
+  },
+  {
+    "title": "Implementación del Sínodo en Colombia: tres informes publicados por el Vaticano ofrecerán nuevas orientaciones para las Iglesias locales",
+    "excerpt": "En el marco de la fase de implementación del Sínodo sobre la Sinodalidad , la Secretaría General del Sínodo continúa publicando los Informes Finales de los Grupos de Estudio creados tras la primera sesión de la XVI Asamblea General Ordinaria del Síno",
+    "date": "10 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia7.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/implementacion-del-sinodo-en-colombia-tres-informes-publicados-por",
+    "video": ""
+  },
+  {
+    "title": "Asamblea Diocesana de San Vicente del Caguán impulsa su camino pastoral y sinodal",
+    "excerpt": "Del 3 al 5 de marzo, la Diócesis de San Vicente del Caguán vivió un momento significativo de reflexión y proyección pastoral con la realización de la Asamblea Diocesana convocada por monseñor William Prieto Daza , quien lleva cerca de un año y medio",
+    "date": "9 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia8.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/asamblea-diocesana-de-san-vicente-del-caguan-impulsa-su-camino",
+    "video": ""
+  },
+  {
+    "title": "Elecciones 2026 en Colombia: Diócesis de Palmira publica guía pastoral para votar con conciencia cristiana",
+    "excerpt": "En el marco del proceso electoral que iniciará Colombia el próximo 8 de marzo, la Diócesis de Palmira, a través de su Pastoral Social, publicó la cartilla “La política es la forma más elevada de la caridad. Artesanos de paz y democracia: Guía para un",
+    "date": "3 de marzo de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia9.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/elecciones-2026-en-colombia-diocesis-de-palmira-publica-guia",
+    "video": ""
+  },
+  {
+    "title": "Arquidiócesis de Bogotá ofrece taller gratuito para personas en duelo: iniciará el 9 de marzo",
+    "excerpt": "En respuesta a las realidades de dolor y pérdida que viven muchas personas, la Arquidiócesis de Bogotá , a través de la Vicaría de Evangelización y el Servicio Arquidiocesano de Evangelización de la Familia (SAEF) , ofrecerá a partir del próximo 9 de",
+    "date": "26 de febrero de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia10.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/arquidiocesis-de-bogota-ofrece-taller-gratuito-para-personas-en",
+    "video": ""
+  },
+  {
+    "title": "‘Santo Pescao’: iniciativa apoyada por la Iglesia en Bolívar impulsa la pesca artesanal durante Cuaresma y Semana Santa",
+    "excerpt": "En el contexto de la Cuaresma y la Semana Santa de 2026 , la iniciativa Santo Pescao vuelve a unir fe, solidaridad y desarrollo comunitario en el departamento de Bolívar. Esta propuesta socioeconómica y gastronómica, apoyada por la Arquidiócesis de C",
+    "date": "23 de febrero de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia11.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/santo-pescao-iniciativa-apoyada-por-la-iglesia-en-bolivar-impulsa-la",
+    "video": ""
+  },
+  {
+    "title": "El Nuncio Apostólico en Colombia llevó a Buenaventura el mensaje de paz y cercanía del Papa León XIV",
+    "excerpt": "Del 20 al 23 de enero, el Nuncio Apostólico en Colombia, monseñor Paolo Rudelli, realizó una visita pastoral a la Diócesis de Buenaventura , en un gesto de cercanía del Papa León XIV con uno de los territorios más golpeados por la violencia, la pobre",
+    "date": "27 de enero de 2026",
+    "category": "Actualidad",
+    "image": "images/noticia12.jpg",
+    "url": "https://cec.org.co/sistema-informativo/actualidad/el-nuncio-apostolico-en-colombia-llevo-buenaventura-el-mensaje-de",
+    "video": "https://www.youtube.com/embed/U8qL9sqKhUA"
+  }
+]

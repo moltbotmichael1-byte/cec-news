@@ -1,0 +1,39 @@
+name: Update CEC News
+
+on:
+  schedule:
+    # Cada 30 minutos
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Permitir ejecución manual
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run scraper
+        run: node scraper.js
+      
+      - name: Commit changes
+        run: |
+          git config --global user.name 'CEC News Bot'
+          git config --global user.email 'bot@cecnews.pages.dev'
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update news $(date '+%Y-%m-%d %H:%M')"
+          git push
+      
+      - name: Deploy to Cloudflare
+        run: |
+          npm install -g wrangler
+          cp news-data.json public/
+          wrangler pages deploy public --project-name=cecnews
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
