@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEC News Widget - Conferencia Episcopal de Colombia</title>
+    <meta name="description" content="Widget de noticias de la Conferencia Episcopal de Colombia para incrustar en tu sitio web">
+    <meta name="keywords" content="CEC, Conferencia Episcopal, Colombia, noticias, widget, iframe">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1a365d; margin-bottom: 10px; }
+        h2 { color: #2c5282; font-size: 1.2rem; margin: 30px 0 15px; }
+        .subtitle { color: #666; margin-bottom: 30px; }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .url-box {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .url-box code {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 15px;
+            display: block;
+            border-radius: 4px;
+            font-size: 1rem;
+            word-break: break-all;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #2c5282;
+        }
+        .feature strong { color: #1a365d; }
+        a { color: #2c5282; }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📰 CEC News Widget</h1>
+        <p class="subtitle">Widget de noticias de la Conferencia Episcopal de Colombia</p>
+        
+        <div class="url-box">
+            <strong>URL del Widget:</strong>
+            <code>https://cec-news.pages.dev/widget.html</code>
+        </div>
+        
+        <h2>🚀 Uso Rápido</h2>
+        <pre>&lt;iframe 
+  src="https://cec-news.pages.dev/widget.html" 
+  width="100%" 
+  height="800" 
+  frameborder="0"
+  loading="lazy"&gt;
+&lt;/iframe&gt;</pre>
+        
+        <h2>📋 Características</h2>
+        <div class="features">
+            <div class="feature">
+                <strong>Actualización</strong><br>
+                Cada 5 minutos
+            </div>
+            <div class="feature">
+                <strong>Noticias</strong><br>
+                12+ de CEC.org.co
+            </div>
+            <div class="feature">
+                <strong>Videos</strong><br>
+                YouTube embebido
+            </div>
+            <div class="feature">
+                <strong>Scroll infinito</strong><br>
+                Carga dinámica
+            </div>
+            <div class="feature">
+                <strong>Responsive</strong><br>
+                Adaptable
+            </div>
+            <div class="feature">
+                <strong>API JSON</strong><br>
+                news-data.json
+            </div>
+        </div>
+        
+        <h2>📄 Documentación Completa</h2>
+        <p>Ver <a href="https://github.com/openclaw/cec-news/blob/main/README.md" target="_blank">README.md</a> para más opciones de personalización.</p>
+        
+        <h2>🔗 Enlaces</h2>
+        <ul>
+            <li><a href="widget.html">Ver Widget</a></li>
+            <li><a href="news-data.json">API JSON</a></li>
+            <li><a href="https://cec.org.co" target="_blank">CEC.org.co</a></li>
+        </ul>
+        
+        <div class="footer">
+            <p>Widget de noticias · <a href="https://cec.org.co" target="_blank">Conferencia Episcopal de Colombia</a></p>
+            <p>Actualización automática · Cloudflare Pages</p>
+        </div>
+    </div>
+</body>
+</html>

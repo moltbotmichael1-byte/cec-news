@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Inscripciones Abiertas 2026",
+    "excerpt": "El Colegio Episcopal de Colombia anuncia el proceso de inscripciones para el año académico 2026. Conoce los requisitos y fechas importantes.",
+    "date": "2026-03-18",
+    "category": "Institucional",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/inscripciones.jpg",
+    "url": "https://cec.org.co/noticias/inscripciones-2026/",
+    "featured": true
+  },
+  {
+    "title": "Simposio de Educación Episcopal",
+    "excerpt": "Participa en el Simposio de Educación Episcopal donde se discutirán las nuevas tendencias educativas y su implementación en nuestras instituciones.",
+    "date": "2026-03-17",
+    "category": "Eventos",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/simposio.jpg",
+    "url": "https://cec.org.co/noticias/simposio-educacion/",
+    "featured": false
+  },
+  {
+    "title": "Resultados Examenes de Estado",
+    "excerpt": "Conoce los resultados de los últimos exámenes de estado y el desempeño de nuestros estudiantes.",
+    "date": "2026-03-16",
+    "category": "Académico",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/resultados.jpg",
+    "url": "https://cec.org.co/noticias/resultados-icfes/",
+    "featured": false
+  },
+  {
+    "title": "Capacitación Docentes 2026",
+    "excerpt": "Inicio del programa de capacitación docente para el año 2026 con enfoque en metodologías innovadoras.",
+    "date": "2026-03-15",
+    "category": "Docentes",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/docentes.jpg",
+    "url": "https://cec.org.co/noticias/capacitacion-docentes/",
+    "featured": false
+  },
+  {
+    "title": "Certificación ISO 9001:2015",
+    "excerpt": "El CEC recibe la certificación ISO 9001:2015 por su sistema de gestión de calidad en educación.",
+    "date": "2026-03-14",
+    "category": "Institucional",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/certificacion.jpg",
+    "url": "https://cec.org.co/noticias/certificacion-iso/",
+    "featured": false
+  },
+  {
+    "title": "Feria de Ciencias 2026",
+    "excerpt": "Invitamos a toda la comunidad educativa a participar en la Feria de Ciencias donde los estudiantes presentarán sus proyectos.",
+    "date": "2026-03-13",
+    "category": "Eventos",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/feria-ciencias.jpg",
+    "url": "https://cec.org.co/noticias/feria-ciencias/",
+    "featured": false
+  },
+  {
+    "title": "Nuevos Laboratorios de Ciencias",
+    "excerpt": "Inauguración de los nuevos laboratorios de ciencias con equipamiento de última generación.",
+    "date": "2026-03-12",
+    "category": "Infraestructura",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/laboratorios.jpg",
+    "url": "https://cec.org.co/noticias/laboratorios/",
+    "featured": false
+  },
+  {
+    "title": "Becas y Ayudas Educativas",
+    "excerpt": "Información sobre el programa de becas y ayudas educativas para estudiantes destacados.",
+    "date": "2026-03-11",
+    "category": "Servicios",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/becas.jpg",
+    "url": "https://cec.org.co/noticias/becas/",
+    "featured": false
+  },
+  {
+    "title": "Reunión de Padres de Familia",
+    "excerpt": "Convocatoria a reunión general de padres de familia para el primer trimestre del año.",
+    "date": "2026-03-10",
+    "category": "Eventos",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/padres.jpg",
+    "url": "https://cec.org.co/noticias/reunion-padres/",
+    "featured": false
+  },
+  {
+    "title": "Jornada Deportiva Intercolegial",
+    "excerpt": "Participa en la jornada deportiva intercolegial con diferentes disciplinas y categorías.",
+    "date": "2026-03-09",
+    "category": "Deportes",
+    "image": "https://cec.org.co/wp-content/uploads/2024/01/deportes.jpg",
+    "url": "https://cec.org.co/noticias/jornada-deportiva/",
+    "featured": false
+  }
+]

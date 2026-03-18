@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); 
+            color: #333; 
+        }
+        
+        .header {
+            text-align: center;
+            padding: 25px 15px;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #1a365d 100%);
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            filter: brightness(0) invert(1);
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        
+        .header p {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.85);
+        }
+        
+        #news-container {
+            padding: 0 10px;
+        }
+        
+        .news-item { 
+            padding: 15px; 
+            margin: 10px 0; 
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+        }
+        
+        .news-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .news-title { 
+            font-size: 1rem; 
+            font-weight: 600;
+            line-height: 1.4;
+            color: #1a1a2e;
+        }
+        
+        .news-excerpt {
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+        
+        .news-date { 
+            font-size: 0.8rem; 
+            color: #888; 
+            margin-top: 8px; 
+        }
+        
+        a { 
+            color: inherit; 
+            text-decoration: none; 
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            color: rgba(255,255,255,0.2);
+            font-size: 36px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.svg" alt="CEC" class="logo">
+        <h1>Conferencia Episcopal de Colombia</h1>
+        <p>Noticias de la Iglesia</p>
+    </div>
+    
+    <div id="news-container"></div>
+    
+    <div class="footer">
+        Fuente: cec.org.co
+    </div>
+
+    <script>
+        const news = [
+            {
+                title: "La Iglesia en Colombia proyecta nuevas líneas para su pastoral educativa",
+                excerpt: "Delegados analizan desafíos de diversidad religiosa, salud mental e IA.",
+                date: "12 Mar 2026",
+                category: "Actualidad",
+                image: "images/noticia1.jpg",
+                url: "https://cec.org.co/sistema-informativo/actualidad/la-iglesia-en-colombia-proyecta-nuevas-lineas-para-su-pastoral"
+            },
+            {
+                title: "Arquidiócesis de Bogotá fortalece su camino sinodal",
+                excerpt: "Cardenal Rueda crea el Consejo Arquidiocesano de Evangelización.",
+                date: "12 Mar 2026",
+                category: "Iglesia en Colombia",
+                image: "images/noticia2.jpg",
+                url: "https://cec.org.co/sistema-informativo/actualidad/bajo-el-liderazgo-del-cardenal-rueda-arquidiocesis-de-bogota"
+            },
+            {
+                title: "Implementación del Sínodo en Colombia",
+                excerpt: "Tres informes del Vaticano sobre misión digital y formación.",
+                date: "10 Mar 2026",
+                category: "Actualidad",
+                image: "images/noticia3.jpg",
+                url: "https://cec.org.co/sistema-informativo/actualidad/implementacion-del-sinodo-en-colombia-tres-informes-publicados-por"
+            },
+            {
+                title: "Asamblea Diocesana de San Vicente del Caguán",
+                excerpt: "Reflexión pastoral en la Amazonía colombiana.",
+                date: "9 Mar 2026",
+                category: "Iglesia en Colombia",
+                image: "images/noticia4.jpg",
+                url: "https://cec.org.co/sistema-informativo/actualidad/asamblea-diocesana-de-san-vicente-del-caguan-impulsa-su-camino"
+            },
+            {
+                title: "Monseñor John Mario Mesa Palacio en Leticia",
+                excerpt: "Nuevo Vicario Apostólico para la Amazonía.",
+                date: "5 Mar 2026",
+                category: "Episcopado",
+                image: "images/noticia5.jpg",
+                url: "https://cec.org.co/sistema-informativo/actualidad/monsenor-john-mario-mesa-palacio-inicia-su-servicio-pastoral-en"
+            },
+            {
+                title: "Iglesia y Procuraduría por elecciones en paz",
+                excerpt: "Estrategia 'Paz Electoral' para elecciones libres.",
+                date: "2 Mar 2026",
+                category: "Actualidad",
+                image: "images/noticia6.jpg",
+                url: "https://cec.org.co/sistema-informativo/actualidad/iglesia-en-colombia-se-une-a-procuraduria-para-promover-elecciones"
+            }
+        ];
+
+        function renderNews() {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+            
+            news.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'news-item';
+                div.onclick = () => window.open(item.url, '_blank');
+                
+                div.innerHTML = `
+                    <img src="${item.image}" alt="" class="news-image" 
+                         onerror="this.outerHTML='<div class=\\'placeholder-image\\'>📰</div>'"
+                         loading="lazy">
+                    <span class="news-category">${item.category}</span>
+                    <div class="news-title">${item.title}</div>
+                    <div class="news-excerpt">${item.excerpt}</div>
+                    <div class="news-date">${item.date}</div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+
+        renderNews();
+    </script>
+</body>
+</html>
