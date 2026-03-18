@@ -338,12 +338,8 @@
 
         async function loadNewsData() {
             try {
-                // Intentar API dinámica primero
-                let response = await fetch('/api/news');
-                if (!response.ok) {
-                    // Fallback a archivo estático
-                    response = await fetch('news-data.json');
-                }
+                // Cargar datos directamente desde archivo estático
+                const response = await fetch('/news-data.json');
                 if (!response.ok) throw new Error('No se pudieron cargar las noticias');
                 newsData = await response.json();
                 return true;
