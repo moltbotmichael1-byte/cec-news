@@ -82,6 +82,9 @@
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            min-height: 350px;
         }
 
         .news-card:hover {
@@ -91,13 +94,30 @@
 
         .news-image {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
+            object-position: center top;
             background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .news-image {
+                height: 200px;
+            }
+        }
+
+        /* Imágenes de Opinión (verticales) - mostrar completas sin cortar */
+        .news-card[data-category="Opinión"] .news-image {
+            object-fit: contain;
+            background: #f8fafc;
         }
 
         .news-content {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .news-meta {
@@ -105,6 +125,7 @@
             gap: 12px;
             margin-bottom: 12px;
             font-size: 0.85rem;
+            flex-wrap: wrap;
         }
 
         .news-category {
@@ -136,6 +157,7 @@
             font-size: 0.9rem;
             color: #555;
             line-height: 1.6;
+            flex-grow: 1;
         }
 
         .news-link {
@@ -157,28 +179,24 @@
         /* Video Container */
         .video-container {
             width: 100%;
-            margin-top: 15px;
-            border-radius: 8px;
+            border-radius: 12px 12px 0 0;
             overflow: hidden;
             background: #000;
+            flex-shrink: 0;
         }
 
         .video-container iframe {
             width: 100%;
             aspect-ratio: 16/9;
             border: none;
+            display: block;
         }
 
-        .play-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255,0,0,0.9);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
+        /* Featured video - fills container height */
+        .featured .video-container iframe {
+            height: 100%;
+            width: 100%;
+            aspect-ratio: auto;
         }
 
         /* Scroll Infinito */
@@ -246,24 +264,17 @@
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 500;
+            margin-left: 8px;
         }
 
-        /* Featured Card (First news with video) */
+        /* Featured Card (First news with video) - Full width, taller */
         .news-card.featured {
             grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
             max-width: none;
         }
 
-        @media (max-width: 768px) {
-            .news-card.featured {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .featured .news-image {
+        .featured .news-image,
+        .featured .video-container {
             height: 300px;
         }
 
@@ -278,15 +289,21 @@
         .featured .news-excerpt {
             font-size: 1rem;
         }
+
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            grid-column: 1/-1;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <img src="images/logo.svg" alt="CEC Logo" class="logo">
+                <img src="images/logo.svg" alt="CEC Logo" class="logo" onerror="this.style.display='none'">
             </div>
-            <h1>Conferencia Episcopal de Colombia</h1>
             <p>Noticias de la Iglesia en Colombia</p>
         </div>
 
@@ -299,133 +316,43 @@
         <div class="footer">
             <p>Fuente: <a href="https://cec.org.co" target="_blank">cec.org.co</a> |
             Actualizado: <span id="timestamp">-</span>
-            <span class="update-badge" id="update-badge">Automático</span></p>
+            <span class="update-badge">Automático</span></p>
         </div>
-        
+    </div>
+
+    <!-- Ver más en CEC.org.co -->
+    <div style="text-align: center; padding: 30px; margin-top: 20px;">
         <a href="https://cec.org.co/" target="_blank" rel="noopener" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
             <span style="margin-right: 8px;">➜</span> Ver más en CEC.org.co
         </a>
     </div>
 
     <script>
-        // Noticias actualizadas automáticamente desde CEC.org.co
-        const news = [
-            {
-                title: "Iglesia en la frontera colombo-ecuatoriana alerta sobre crisis social y económica y llama al diálogo entre los países",
-                excerpt: "Ante este panorama, las diócesis de la frontera reiteraron su cercanía con las comunidades afectadas y expresaron su solidaridad con las familias y sectores productivos que hoy enfrentan dificultades.",
-                date: "17 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia1.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/iglesia-en-la-frontera-colombo-ecuatoriana-alerta-sobre-crisis",
-                video: "https://www.youtube.com/embed/IWbuFCoWv0E"
-            },
-            {
-                title: "Monseñor Rubén Darío Jaramillo Montoya asume como noveno obispo de Montería: llama a la fe, la unidad y el desarrollo humano integral",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "16 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia2.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/monsenor-ruben-dario-jaramillo-montoya-asume-como-noveno-obispo-de",
-                video: ""
-            },
-            {
-                title: "La Iglesia en Colombia proyecta nuevas líneas para su pastoral educativa ante desafíos como la diversidad religiosa, la salud mental y la inteligencia",
-                excerpt: "Delegados de pastoral educativa de 33 jurisdicciones eclesiásticas del país se reunieron en Bogotá para analizar los desafíos actuales del sistema educativo colombiano y proyectar nuevas líneas de acc",
-                date: "12 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia3.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/la-iglesia-en-colombia-proyecta-nuevas-lineas-para-su-pastoral",
-                video: "https://www.youtube.com/embed/CV2j6xzcyXk"
-            },
-            {
-                title: "Bajo el liderazgo del cardenal Rueda, Arquidiócesis de Bogotá fortalece su camino sinodal con la creación de nuevo Consejo de Evangelización",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "12 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia4.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/bajo-el-liderazgo-del-cardenal-rueda-arquidiocesis-de-bogota",
-                video: ""
-            },
-            {
-                title: "Nueva edición para Colombia del Misal Romano",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "16 de marzo de 2026",
-                category: "Opinión",
-                image: "images/noticia5.png",
-                url: "https://cec.org.co/sistema-informativo/opinion/nueva-edicion-para-colombia-del-misal-romano",
-                video: ""
-            },
-            {
-                title: "La Esperanza en Jesucristo no defrauda",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "9 de marzo de 2026",
-                category: "Opinión",
-                image: "images/noticia6.jpg",
-                url: "https://cec.org.co/sistema-informativo/opinion/la-esperanza-en-jesucristo-no-defrauda",
-                video: ""
-            },
-            {
-                title: "Implementación del Sínodo en Colombia: tres informes publicados por el Vaticano ofrecerán nuevas orientaciones para las Iglesias locales",
-                excerpt: "Los documentos han sido publicados oficialmente en inglés e italiano, indicando en cada caso el idioma original y la traducción de trabajo. También se han dado a conocer síntesis de cada uno. ",
-                date: "10 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia7.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/implementacion-del-sinodo-en-colombia-tres-informes-publicados-por",
-                video: ""
-            },
-            {
-                title: "Asamblea Diocesana de San Vicente del Caguán impulsa su camino pastoral y sinodal",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "9 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia8.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/asamblea-diocesana-de-san-vicente-del-caguan-impulsa-su-camino",
-                video: ""
-            },
-            {
-                title: "Elecciones 2026 en Colombia: Diócesis de Palmira publica guía pastoral para votar con conciencia cristiana",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "3 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia9.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/elecciones-2026-en-colombia-diocesis-de-palmira-publica-guia",
-                video: ""
-            },
-            {
-                title: "Arquidiócesis de Bogotá ofrece taller gratuito para personas en duelo: iniciará el 9 de marzo",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "26 de febrero de 2026",
-                category: "Actualidad",
-                image: "images/noticia10.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/arquidiocesis-de-bogota-ofrece-taller-gratuito-para-personas-en",
-                video: ""
-            },
-            {
-                title: "‘Santo Pescao’: iniciativa apoyada por la Iglesia en Bolívar impulsa la pesca artesanal durante Cuaresma y Semana Santa",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "23 de febrero de 2026",
-                category: "Actualidad",
-                image: "images/noticia11.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/santo-pescao-iniciativa-apoyada-por-la-iglesia-en-bolivar-impulsa-la",
-                video: ""
-            },
-            {
-                title: "El Nuncio Apostólico en Colombia llevó a Buenaventura el mensaje de paz y cercanía del Papa León XIV",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "27 de enero de 2026",
-                category: "Actualidad",
-                image: "images/noticia12.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/el-nuncio-apostolico-en-colombia-llevo-buenaventura-el-mensaje-de",
-                video: "https://www.youtube.com/embed/U8qL9sqKhUA"
-            }
-        ];
-
-        // Configuración de lazy loading
-        const INITIAL_LOAD = 6;
-        const LOAD_MORE = 3;
+        // Cargar noticias desde news-data.json
+        let newsData = [];
         let currentIndex = 0;
-        let isLoading = false;
-        
+        const urlParams = new URLSearchParams(window.location.search);
+        const LIMIT = urlParams.has('limit') ? parseInt(urlParams.get('limit')) : null;
+        const INITIAL_LOAD = LIMIT || 6;
+        const LOAD_MORE = LIMIT ? LIMIT : 3;
+
+        async function loadNewsData() {
+            try {
+                // Intentar API dinámica primero
+                let response = await fetch('/api/news');
+                if (!response.ok) {
+                    // Fallback a archivo estático
+                    response = await fetch('news-data.json');
+                }
+                if (!response.ok) throw new Error('No se pudieron cargar las noticias');
+                newsData = await response.json();
+                return true;
+            } catch (error) {
+                console.error('Error cargando noticias:', error);
+                return false;
+            }
+        }
+
         function renderNews() {
             const container = document.getElementById('news-container');
             
@@ -435,35 +362,35 @@
             }
             
             // Cargar siguiente lote de noticias
-            const endIndex = Math.min(currentIndex + (currentIndex === 0 ? INITIAL_LOAD : LOAD_MORE), news.length);
+            const endIndex = Math.min(currentIndex + (currentIndex === 0 ? INITIAL_LOAD : LOAD_MORE), newsData.length);
             
             for (let i = currentIndex; i < endIndex; i++) {
-                const item = news[i];
+                const item = newsData[i];
                 const card = document.createElement('div');
-                const isFeatured = i === 0;
+                const isFeatured = i === 0 && item.video;
                 card.className = isFeatured ? 'news-card featured' : 'news-card';
                 card.setAttribute('data-index', i);
+                card.setAttribute('data-category', item.category || 'Actualidad');
 
                 // Si tiene video, mostrar video en lugar de imagen
                 if (item.video) {
                     card.innerHTML = `
-                        <div class="video-container" style="border-radius: 12px 12px 0 0; overflow: hidden;">
+                        <div class="video-container">
                             <iframe src="${item.video}?rel=0&modestbranding=1"
                                     title="${item.title}"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen
-                                    loading="lazy"
-                                    style="width: 100%; aspect-ratio: 16/9; border: none;">
+                                    loading="lazy">
                             </iframe>
                         </div>
                         <div class="news-content">
                             <div class="news-meta">
-                                <span class="news-category">${item.category}</span>
-                                <span class="news-date">${item.date}</span>
+                                <span class="news-category">${item.category || 'Actualidad'}</span>
+                                <span class="news-date">${item.date || ''}</span>
                             </div>
                             <h3 class="news-title">${item.title}</h3>
-                            <p class="news-excerpt">${item.excerpt}</p>
+                            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
                             <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
                                 Leer más →
                             </a>
@@ -472,15 +399,15 @@
                 } else {
                     card.innerHTML = `
                         <img src="${item.image}" alt="${item.title}" class="news-image"
-                             onerror="this.outerHTML='<div class=\'placeholder-image\'>📰</div>'"
+                             onerror="this.outerHTML='<div class=\\'placeholder-image\\'>📰</div>'"
                              loading="lazy">
                         <div class="news-content">
                             <div class="news-meta">
-                                <span class="news-category">${item.category}</span>
-                                <span class="news-date">${item.date}</span>
+                                <span class="news-category">${item.category || 'Actualidad'}</span>
+                                <span class="news-date">${item.date || ''}</span>
                             </div>
                             <h3 class="news-title">${item.title}</h3>
-                            <p class="news-excerpt">${item.excerpt}</p>
+                            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
                             <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
                                 Leer más →
                             </a>
@@ -509,8 +436,11 @@
                 minute: '2-digit'
             });
 
-            // Añadir indicador de carga si hay más noticias
-            if (currentIndex < news.length) {
+            // Añadir indicador de carga si hay más noticias y no hay límite
+            const existingLoader = document.getElementById('load-more-indicator');
+            if (existingLoader) existingLoader.remove();
+            
+            if (currentIndex < newsData.length && !LIMIT) {
                 const loader = document.createElement('div');
                 loader.id = 'load-more-indicator';
                 loader.style.cssText = 'text-align: center; padding: 20px; grid-column: 1/-1; color: #666;';
@@ -519,35 +449,49 @@
             }
         }
 
-        // Inicializar
-        renderNews();
-
         // Intersection Observer para scroll infinito
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && currentIndex < news.length) {
-                    const loader = document.getElementById('load-more-indicator');
-                    if (loader) {
-                        loader.remove();
-                        renderNews();
-                        // Re-observar el nuevo indicador
-                        setTimeout(() => {
-                            const newLoader = document.getElementById('load-more-indicator');
-                            if (newLoader) observer.observe(newLoader);
-                        }, 100);
+        let scrollObserver = null;
+        
+        function setupScrollObserver() {
+            scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && currentIndex < newsData.length) {
+                        const loader = document.getElementById('load-more-indicator');
+                        if (loader) {
+                            loader.remove();
+                            renderNews();
+                            setupScrollObserver();
+                        }
                     }
-                }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '200px' 
             });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '200px' 
-        });
 
-        // Observar el indicador de carga inicial
-        setTimeout(() => {
-            const loader = document.getElementById('load-more-indicator');
-            if (loader) observer.observe(loader);
-        }, 500);
+            setTimeout(() => {
+                const loader = document.getElementById('load-more-indicator');
+                if (loader) scrollObserver.observe(loader);
+            }, 500);
+        }
+
+        // Inicializar
+        async function init() {
+            const loaded = await loadNewsData();
+            if (loaded && newsData.length > 0) {
+                renderNews();
+                setupScrollObserver();
+            } else {
+                document.getElementById('news-container').innerHTML = `
+                    <div class="error-message">
+                        <p>No se pudieron cargar las noticias.</p>
+                        <p style="margin-top: 10px;"><a href="https://cec.org.co" target="_blank">Visitar CEC.org.co →</a></p>
+                    </div>
+                `;
+            }
+        }
+
+        init();
     </script>
 </body>
 </html>
