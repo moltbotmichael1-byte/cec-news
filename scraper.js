@@ -155,10 +155,42 @@ async function extractNewsDetails(newsUrl) {
         const ogDescMatch = html.match(/<meta[^>]*property="og:description"[^>]*content="([^"]+)"/i);
         let description = (descMatch ? descMatch[1] : (ogDescMatch ? ogDescMatch[1] : ''));
         
-        // Si la descripción es muy corta, buscar en el contenido
-        if (description.length < 50) {
-            const pMatch = html.match(/<p[^>]*>([^<]{50,300})<\/p>/i);
-            if (pMatch) description = pMatch[1].substring(0, 200);
+        // BUSCAR EN EL CONTENIDO DEL ARTÍCULO - múltiples intentos
+        if (description.length < 100) {
+            // Intento 1: Buscar schema:text (contenido principal)
+            const schemaMatch = html.match(/property="schema:text"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/i);
+            if (schemaMatch) {
+                const content = schemaMatch[1].replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+                if (content.length > 100) {
+                    description = content.substring(0, 250).trim();
+                }
+            }
+        }
+        
+        // Intento 2: Buscar div con clase content/entry/article-body
+        if (description.length < 100) {
+            const contentMatch = html.match(/<div[^>]*class="[^"]*(?:content|entry|article-body|post-content|entry-content)[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/i);
+            if (contentMatch) {
+                const paragraphs = contentMatch[1].match(/<p[^>]*>([\s\S]*?)<\/p>/gi);
+                if (paragraphs && paragraphs.length > 0) {
+                    // Concatenar los primeros 2-3 párrafos significativos
+                    const texts = paragraphs.map(p => p.replace(/<[^>]*>/g, '').trim()).filter(t => t.length > 30);
+                    if (texts.length > 0) {
+                        description = texts.slice(0, 2).join(' ').substring(0, 250).trim();
+                    }
+                }
+            }
+        }
+        
+        // Intento 3: Buscar todos los párrafos significativos
+        if (description.length < 100) {
+            const allParagraphs = html.match(/<p[^>]*>([\s\S]*?)<\/p>/gi);
+            if (allParagraphs) {
+                const texts = allParagraphs.map(p => p.replace(/<[^>]*>/g, '').trim()).filter(t => t.length > 50 && !t.includes('Suscribir') && !t.includes('Leer más'));
+                if (texts.length > 0) {
+                    description = texts.slice(0, 2).join(' ').substring(0, 250).trim();
+                }
+            }
         }
         
         // Extraer imagen OG

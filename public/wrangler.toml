@@ -1,0 +1,7 @@
+name = "cec-news"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "public"
+
+[[kv_namespaces]]
+binding = "CEC_NEWS"
+id = "39897b0864af42dca6c8971e08df933b"

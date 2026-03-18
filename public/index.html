@@ -3,547 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias CEC - Conferencia Episcopal de Colombia</title>
+    <title>CEC News Widget - Conferencia Episcopal de Colombia</title>
+    <meta name="description" content="Widget de noticias de la Conferencia Episcopal de Colombia para incrustar en tu sitio web. Actualización automática, responsive, sin dependencias.">
+    <meta name="keywords" content="CEC, Conferencia Episcopal, Colombia, noticias, widget, iframe, embed">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            background: linear-gradient(180deg, #f0f4f8 0%, #ffffff 100%);
             min-height: 100vh;
+            padding: 20px;
             color: #333;
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
         }
-
         .header {
             text-align: center;
             padding: 40px 20px;
-            background: #ffffff;
+            background: white;
             border-radius: 16px;
             margin-bottom: 30px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            border: 1px solid #e9ecef;
         }
-
-        .logo-container {
-            margin-bottom: 20px;
-        }
-
         .logo {
-            max-width: 300px;
-            width: 100%;
-            height: auto;
+            max-width: 200px;
+            margin-bottom: 15px;
         }
-
-        .header h1 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a365d;
-            margin-bottom: 4px;
-        }
-
-        .header p {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        @media (max-width: 400px) {
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-            .header {
-                padding: 25px 15px;
-            }
-            .header h1 {
-                font-size: 1.5rem;
-            }
-        }
-
-        .news-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
+        h1 { color: #1a365d; font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { color: #666; font-size: 1rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+        
+        /* Technical Info */
+        .tech-info {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #e9ecef;
         }
-
-        .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        .tech-info h2 {
+            color: #1a365d;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
         }
-
-        .news-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
-
-        .news-content {
-            padding: 20px;
+        .tech-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #2c5282;
         }
-
-        .news-meta {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
+        .tech-item strong {
+            display: block;
+            color: #1a365d;
+            margin-bottom: 5px;
+        }
+        .tech-item code {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
             font-size: 0.85rem;
         }
-
-        .news-category {
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            color: #fff;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        
+        /* Generator Tool */
+        .generator {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
-
-        .news-date {
-            color: #666;
-            display: flex;
-            align-items: center;
-        }
-
-        .news-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            line-height: 1.4;
-            color: #1a1a2e;
+        .generator h2 {
+            color: #1a365d;
             margin-bottom: 10px;
+            font-size: 1.2rem;
         }
-
-        .news-excerpt {
-            font-size: 0.9rem;
-            color: #555;
+        .generator p {
+            color: #666;
+            margin-bottom: 25px;
             line-height: 1.6;
         }
-
-        .news-link {
-            display: inline-flex;
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .option-group label {
+            display: block;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .option-group input, .option-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .option-group input:focus, .option-group select:focus {
+            outline: none;
+            border-color: #2c5282;
+        }
+        .code-box {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        .code-box code {
+            color: #e2e8f0;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre;
+        }
+        .copy-btn {
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.3);
+        }
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Preview */
+        .preview-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
-            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        .preview-header h2 {
+            color: #1a365d;
+            font-size: 1.2rem;
+        }
+        .preview-link {
             color: #2c5282;
             text-decoration: none;
             font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
         }
-
-        .news-link:hover {
-            color: #1a365d;
+        .preview-link:hover {
+            text-decoration: underline;
         }
-
-        /* Video Container */
-        .video-container {
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 8px;
+        .preview-frame {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             overflow: hidden;
-            background: #000;
+            background: #f8fafc;
         }
-
-        .video-container iframe {
+        .preview-frame iframe {
             width: 100%;
-            aspect-ratio: 16/9;
+            height: 600px;
             border: none;
         }
-
-        .play-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255,0,0,0.9);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        /* Scroll Infinito */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        body::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        body::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 5px;
-        }
-
-        body::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            border-radius: 5px;
-        }
-
-        body::-webkit-scrollbar-thumb:hover {
-            background: #1a365d;
-        }
-
-        .container {
-            max-width: 1400px;
-        }
-
+        
         .footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 25px;
+            padding: 30px;
             color: #666;
             font-size: 0.9rem;
-            border-top: 1px solid #e9ecef;
         }
-
         .footer a {
             color: #2c5282;
             text-decoration: none;
-            font-weight: 500;
         }
-
-        .placeholder-image {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            color: rgba(255,255,255,0.3);
-            font-size: 48px;
+        .footer a:hover {
+            text-decoration: underline;
         }
-
-        .update-badge {
-            background: #48bb78;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* Featured Card (First news with video) */
-        .news-card.featured {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: none;
-        }
-
-        @media (max-width: 768px) {
-            .news-card.featured {
+        
+        @media (max-width: 600px) {
+            .options {
                 grid-template-columns: 1fr;
             }
-        }
-
-        .featured .news-image {
-            height: 300px;
-        }
-
-        .featured .news-content {
-            padding: 25px;
-        }
-
-        .featured .news-title {
-            font-size: 1.4rem;
-        }
-
-        .featured .news-excerpt {
-            font-size: 1rem;
+            .preview-frame iframe {
+                height: 400px;
+            }
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-container">
-                <img src="images/logo.svg" alt="CEC Logo" class="logo">
-            </div>
-            <h1>Conferencia Episcopal de Colombia</h1>
-            <p>Noticias de la Iglesia en Colombia</p>
+            <img src="https://cec.org.co/wp-content/uploads/2024/01/cec-logo.png" alt="CEC Logo" class="logo" onerror="this.style.display='none'">
+            <h1>CEC News Widget</h1>
+            <p class="subtitle">Incrusta noticias de la Conferencia Episcopal de Colombia en tu sitio web. Actualizaci&oacute;n autom&aacute;tica cada 30 minutos, sin dependencias externas.</p>
         </div>
-
-        <div id="news-container" class="news-grid">
-            <div style="text-align: center; padding: 40px; grid-column: 1/-1;">
-                <p style="color: #666;">Cargando noticias...</p>
+        
+        <!-- Technical Info -->
+        <div class="tech-info">
+            <h2>Especificaciones t&eacute;cnicas</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>Fuente de datos</strong>
+                    <code>cec.org.co</code>
+                </div>
+                <div class="tech-item">
+                    <strong>Responsive</strong>
+                    <code>CSS Grid</code>
+                </div>
             </div>
         </div>
-
+        
+        <!-- Generator Tool -->
+        <div class="generator">
+            <h2>Generador de iframe</h2>
+            <p>Personaliza las dimensiones y cantidad de noticias. El c&oacute;digo generado puedes copiarlo directamente en tu HTML.</p>
+            
+            <div class="options">
+                <div class="option-group">
+                    <label for="width">Ancho</label>
+                    <input type="text" id="width" value="100%" placeholder="100% o 800px">
+                </div>
+                <div class="option-group">
+                    <label for="height">Alto (px)</label>
+                    <input type="number" id="height" value="600" placeholder="600">
+                </div>
+                <div class="option-group">
+                    <label for="newsCount">Noticias visibles</label>
+                    <select id="newsCount">
+                        <option value="6">6 noticias</option>
+                        <option value="10" selected>10 noticias</option>
+                        <option value="12">12 noticias</option>
+                        <option value="all">Sin l&iacute;mite</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="code-box">
+                <code id="iframeCode">&lt;iframe 
+  src="https://cec-news.pages.dev/widget" 
+  width="100%" 
+  height="600" 
+  frameborder="0"
+  loading="lazy"
+  style="border-radius: 12px;"&gt;
+&lt;/iframe&gt;</code>
+            </div>
+            
+            <button class="copy-btn" onclick="copyCode()">
+                Copiar c&oacute;digo
+            </button>
+        </div>
+        
+        <!-- Preview -->
+        <div class="preview-section">
+            <div class="preview-header">
+                <h2>Vista previa</h2>
+                <a href="widget" target="_blank" class="preview-link">Abrir en nueva pesta&ntilde;a</a>
+            </div>
+            <div class="preview-frame">
+                <iframe id="previewFrame" src="widget" loading="lazy"></iframe>
+            </div>
+        </div>
+        
         <div class="footer">
-            <p>Fuente: <a href="https://cec.org.co" target="_blank">cec.org.co</a> |
-            Actualizado: <span id="timestamp">-</span>
-            <span class="update-badge" id="update-badge">Automático</span></p>
+            <p>Las noticias se obtienen de <a href="https://cec.org.co" target="_blank">CEC.org.co</a> y se actualizan autom&aacute;ticamente.
+            <br>El widget no almacena datos, solo presenta informaci&oacute;n p&uacute;blica.</p>
         </div>
     </div>
-
+    
     <script>
-        // Noticias actualizadas automáticamente desde CEC.org.co
-        const news = [
-            {
-                title: "Monseñor Rubén Darío Jaramillo Montoya asume como noveno obispo de Montería: llama a la fe, la unidad y el desarrollo humano integral",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "16 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia1.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/monsenor-ruben-dario-jaramillo-montoya-asume-como-noveno-obispo-de",
-                video: ""
-            },
-            {
-                title: "La Iglesia en Colombia proyecta nuevas líneas para su pastoral educativa ante desafíos como la diversidad religiosa, la salud mental y la inteligencia",
-                excerpt: "Delegados de pastoral educativa de 33 jurisdicciones eclesiásticas del país se reunieron en Bogotá para analizar los desafíos actuales del sistema educativo colombiano y proyectar nuevas líneas de acc",
-                date: "12 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia2.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/la-iglesia-en-colombia-proyecta-nuevas-lineas-para-su-pastoral",
-                video: "https://www.youtube.com/embed/CV2j6xzcyXk"
-            },
-            {
-                title: "Bajo el liderazgo del cardenal Rueda, Arquidiócesis de Bogotá fortalece su camino sinodal con la creación de nuevo Consejo de Evangelización",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "12 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia3.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/bajo-el-liderazgo-del-cardenal-rueda-arquidiocesis-de-bogota",
-                video: ""
-            },
-            {
-                title: "Implementación del Sínodo en Colombia: tres informes publicados por el Vaticano ofrecerán nuevas orientaciones para las Iglesias locales",
-                excerpt: "Los documentos han sido publicados oficialmente en inglés e italiano, indicando en cada caso el idioma original y la traducción de trabajo. También se han dado a conocer síntesis de cada uno. ",
-                date: "10 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia4.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/implementacion-del-sinodo-en-colombia-tres-informes-publicados-por",
-                video: ""
-            },
-            {
-                title: "Nueva edición para Colombia del Misal Romano",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "16 de marzo de 2026",
-                category: "Opinión",
-                image: "images/noticia5.png",
-                url: "https://cec.org.co/sistema-informativo/opinion/nueva-edicion-para-colombia-del-misal-romano",
-                video: ""
-            },
-            {
-                title: "La Esperanza en Jesucristo no defrauda",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "9 de marzo de 2026",
-                category: "Opinión",
-                image: "images/noticia6.jpg",
-                url: "https://cec.org.co/sistema-informativo/opinion/la-esperanza-en-jesucristo-no-defrauda",
-                video: ""
-            },
-            {
-                title: "Asamblea Diocesana de San Vicente del Caguán impulsa su camino pastoral y sinodal",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "9 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia7.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/asamblea-diocesana-de-san-vicente-del-caguan-impulsa-su-camino",
-                video: ""
-            },
-            {
-                title: "Secretariado Nacional de Pastoral Social propone guía con claves para vivir el Evangelio durante las elecciones de 2026 en Colombia",
-                excerpt: "Uno de los ejes centrales de la cartilla es la invitación a comprender el voto como un acto profundamente ético. Según el documento, la participación electoral no es un gesto aislado, sino una decisió",
-                date: "6 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia8.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/secretariado-nacional-de-pastoral-social-propone-guia-con-claves",
-                video: "https://www.youtube.com/embed/z0vg8lqle5k"
-            },
-            {
-                title: "Elecciones 2026 en Colombia: Diócesis de Palmira publica guía pastoral para votar con conciencia cristiana",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "3 de marzo de 2026",
-                category: "Actualidad",
-                image: "images/noticia9.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/elecciones-2026-en-colombia-diocesis-de-palmira-publica-guia",
-                video: ""
-            },
-            {
-                title: "Arquidiócesis de Bogotá ofrece taller gratuito para personas en duelo: iniciará el 9 de marzo",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "26 de febrero de 2026",
-                category: "Actualidad",
-                image: "images/noticia10.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/arquidiocesis-de-bogota-ofrece-taller-gratuito-para-personas-en",
-                video: ""
-            },
-            {
-                title: "‘Santo Pescao’: iniciativa apoyada por la Iglesia en Bolívar impulsa la pesca artesanal durante Cuaresma y Semana Santa",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "23 de febrero de 2026",
-                category: "Actualidad",
-                image: "images/noticia11.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/santo-pescao-iniciativa-apoyada-por-la-iglesia-en-bolivar-impulsa-la",
-                video: ""
-            },
-            {
-                title: "El Nuncio Apostólico en Colombia llevó a Buenaventura el mensaje de paz y cercanía del Papa León XIV",
-                excerpt: "Conferencia Episcopal de Colombia",
-                date: "27 de enero de 2026",
-                category: "Actualidad",
-                image: "images/noticia12.jpg",
-                url: "https://cec.org.co/sistema-informativo/actualidad/el-nuncio-apostolico-en-colombia-llevo-buenaventura-el-mensaje-de",
-                video: "https://www.youtube.com/embed/U8qL9sqKhUA"
-            }
-        ];
-
-        // Configuración de lazy loading
-        const INITIAL_LOAD = 6;
-        const LOAD_MORE = 3;
-        let currentIndex = 0;
-        let isLoading = false;
+        const baseURL = 'https://cec-news.pages.dev/widget';
         
-        function renderNews() {
-            const container = document.getElementById('news-container');
+        function updateCode() {
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const newsCount = document.getElementById('newsCount').value;
             
-            // Primera carga
-            if (currentIndex === 0) {
-                container.innerHTML = '';
+            const widthStyle = width.includes('%') ? `"${width}"` : `"${width}px"`;
+            
+            let url = baseURL;
+            if (newsCount !== 'all') {
+                url += `?limit=${newsCount}`;
             }
             
-            // Cargar siguiente lote de noticias
-            const endIndex = Math.min(currentIndex + (currentIndex === 0 ? INITIAL_LOAD : LOAD_MORE), news.length);
+            const code = `&lt;iframe 
+  src="${url}" 
+  width=${widthStyle}
+  height="${height}" 
+  frameborder="0"
+  loading="lazy"
+  style="border-radius: 12px;"&gt;
+&lt;/iframe&gt;`;
             
-            for (let i = currentIndex; i < endIndex; i++) {
-                const item = news[i];
-                const card = document.createElement('div');
-                const isFeatured = i === 0;
-                card.className = isFeatured ? 'news-card featured' : 'news-card';
-                card.setAttribute('data-index', i);
-
-                // Si tiene video, mostrar video en lugar de imagen
-                if (item.video) {
-                    card.innerHTML = `
-                        <div class="video-container" style="border-radius: 12px 12px 0 0; overflow: hidden;">
-                            <iframe src="${item.video}?rel=0&modestbranding=1"
-                                    title="${item.title}"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                    loading="lazy"
-                                    style="width: 100%; aspect-ratio: 16/9; border: none;">
-                            </iframe>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-category">${item.category}</span>
-                                <span class="news-date">${item.date}</span>
-                            </div>
-                            <h3 class="news-title">${item.title}</h3>
-                            <p class="news-excerpt">${item.excerpt}</p>
-                            <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
-                                Leer más →
-                            </a>
-                        </div>
-                    `;
-                } else {
-                    card.innerHTML = `
-                        <img src="${item.image}" alt="${item.title}" class="news-image"
-                             onerror="this.outerHTML='<div class=\'placeholder-image\'>📰</div>'"
-                             loading="lazy">
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-category">${item.category}</span>
-                                <span class="news-date">${item.date}</span>
-                            </div>
-                            <h3 class="news-title">${item.title}</h3>
-                            <p class="news-excerpt">${item.excerpt}</p>
-                            <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
-                                Leer más →
-                            </a>
-                        </div>
-                    `;
-                }
-
-                card.onclick = (e) => {
-                    if (e.target.tagName !== 'A' && e.target.tagName !== 'IFRAME') {
-                        window.open(item.url, '_blank');
-                    }
-                };
-
-                container.appendChild(card);
-            }
-
-            currentIndex = endIndex;
-
-            // Mostrar timestamp de actualización
-            const now = new Date();
-            document.getElementById('timestamp').textContent = now.toLocaleDateString('es-CO', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
-            // Añadir indicador de carga si hay más noticias
-            if (currentIndex < news.length) {
-                const loader = document.createElement('div');
-                loader.id = 'load-more-indicator';
-                loader.style.cssText = 'text-align: center; padding: 20px; grid-column: 1/-1; color: #666;';
-                loader.innerHTML = '<p>↓ Desliza para ver más noticias ↓</p>';
-                container.appendChild(loader);
-            }
+            document.getElementById('iframeCode').innerHTML = code;
+            
+            // Update preview
+            document.getElementById('previewFrame').src = url;
+            document.getElementById('previewFrame').style.height = height + 'px';
         }
-
-        // Inicializar
-        renderNews();
-
-        // Intersection Observer para scroll infinito
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && currentIndex < news.length) {
-                    const loader = document.getElementById('load-more-indicator');
-                    if (loader) {
-                        loader.remove();
-                        renderNews();
-                        // Re-observar el nuevo indicador
-                        setTimeout(() => {
-                            const newLoader = document.getElementById('load-more-indicator');
-                            if (newLoader) observer.observe(newLoader);
-                        }, 100);
-                    }
-                }
+        
+        function copyCode() {
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const newsCount = document.getElementById('newsCount').value;
+            
+            let url = baseURL;
+            if (newsCount !== 'all') {
+                url += `?limit=${newsCount}`;
+            }
+            
+            const code = `<iframe 
+  src="${url}" 
+  width="${width}"
+  height="${height}" 
+  frameborder="0"
+  loading="lazy"
+  style="border-radius: 12px;">
+</iframe>`;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copiado!';
+                setTimeout(() => {
+                    btn.textContent = 'Copiar c&oacute;digo';
+                }, 2000);
             });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '200px' 
-        });
-
-        // Observar el indicador de carga inicial
-        setTimeout(() => {
-            const loader = document.getElementById('load-more-indicator');
-            if (loader) observer.observe(loader);
-        }, 500);
+        }
+        
+        // Update on input change
+        document.getElementById('width').addEventListener('input', updateCode);
+        document.getElementById('height').addEventListener('input', updateCode);
+        document.getElementById('newsCount').addEventListener('change', updateCode);
     </script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+*.env.local
+
+# Backups
+*.bak
+*.tar.gz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.log
+tmp/
+
+# Unneeded
+public_clean/
+worker.js
