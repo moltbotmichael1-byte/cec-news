@@ -49,7 +49,7 @@ fi
 
 # 5. Resumen final
 echo "[$TIMESTAMP] ✅ CEC News actualizado: $(date '+%H:%M:%S')" | tee -a "$LOG_FILE"
-echo "[$TIMESTAMP] 🔗 https://cec-news.pages.dev" | tee -a "$LOG_FILE"
+echo "[$TIMESTAMP] 🔗 https://cecnews.pages.dev" | tee -a "$LOG_FILE"
 
 # Cleanup
 rm -f /tmp/cec-news-raw.txt 2>/dev/null || true

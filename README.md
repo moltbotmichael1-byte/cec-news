@@ -4,9 +4,9 @@ Widget de noticias de la Conferencia Episcopal de Colombia.
 
 ## URLs
 
-- **Widget:** https://cec-news.pages.dev/widget
-- **Landing:** https://cec-news.pages.dev/
-- **API:** https://cec-news.pages.dev/api/news
+- **Widget:** https://cecnews.pages.dev/widget
+- **Landing:** https://cecnews.pages.dev/
+- **API:** https://cecnews.pages.dev/api/news
 - **GitHub:** https://github.com/moltbotmichael1-byte/cec-news
 
 ## Arquitectura
