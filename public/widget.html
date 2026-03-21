@@ -16,122 +16,213 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fff;
+            background: #f5f5f5;
             color: #333;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px 0;
         }
 
         .widget-container {
             max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             background: #fff;
-            min-height: 100vh;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        @media (max-width: 500px) {
-            .widget-container {
-                max-width: 400px;
-            }
-        }
-
-        /* Header Banner */
+        /* Header */
         .widget-header {
             background: #fff;
-            padding: 12px 16px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             border-bottom: 1px solid #e2e8f0;
         }
 
         .widget-banner {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             text-decoration: none;
-            width: 100%;
         }
 
         .widget-logo {
-            height: 40px;
+            height: 36px;
             width: auto;
             flex-shrink: 0;
         }
 
         .widget-title-group {
-            margin-left: 12px;
+            margin-left: 10px;
         }
 
         .widget-title {
             color: #1e3a5f;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
         }
 
-        /* Featured News - Mobile Reel Style (default) */
-        .featured-news {
-            position: relative;
-            background: #000;
+        .widget-subtitle {
+            color: #718096;
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 2px;
         }
 
-        .featured-container {
-            position: relative;
+        /* Main Layout - Desktop: Two columns */
+        .main-layout {
             display: flex;
             flex-direction: column;
         }
 
-        .featured-media-wrapper {
+        /* Featured Section */
+        .featured-section {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             position: relative;
+        }
+
+        .featured-slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .featured-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .featured-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .featured-link {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+        }
+
+        .featured-media-wrapper {
+            flex: 1;
+            min-height: 0;
+            position: relative;
+            overflow: hidden;
         }
 
         .featured-media {
             width: 100%;
-            aspect-ratio: 9/16;
-            max-height: 500px;
+            height: 100%;
             object-fit: cover;
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .featured-video {
             width: 100%;
-            aspect-ratio: 9/16;
-            max-height: 500px;
+            height: 100%;
             border: none;
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
-        .featured-overlay {
-            padding: 16px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e2e8f0;
+        .featured-content {
+            padding: 8px 12px;
+            background: #fff;
+            flex-shrink: 0;
+        }
+
+        /* Carousel arrows */
+        .carousel-arrow {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s ease;
+            opacity: 0.6;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .carousel-arrow:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .carousel-arrow-prev {
+            left: 12px;
+        }
+
+        .carousel-arrow-next {
+            right: 12px;
+        }
+
+        .carousel-arrow svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255,255,255,0.95);
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
         }
 
         .featured-category {
             display: inline-block;
             background: #dc2626;
             color: #fff;
-            font-size: 9px;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-bottom: 8px;
+            font-size: 7px;
+            font-weight: 500;
+            padding: 2px 5px;
+            border-radius: 2px;
+            margin-bottom: 3px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .featured-title {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 500;
             color: #1a202c;
-            line-height: 1.35;
-            margin-bottom: 8px;
+            line-height: 1.25;
+            margin-bottom: 2px;
         }
 
         .featured-excerpt {
-            font-size: 13px;
+            font-size: 10px;
             color: #4a5568;
-            line-height: 1.45;
+            line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -139,64 +230,36 @@
         }
 
         .featured-date {
-            font-size: 11px;
+            font-size: 8px;
             color: #a0aec0;
-            margin-top: 8px;
+            margin-top: 3px;
         }
 
-        /* Desktop: Side by side - video left, news list right */
-        @media (min-width: 700px) {
-            .featured-container {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-
-            .featured-media-wrapper {
-                flex: 0 0 300px;
-                position: relative;
-            }
-
-            .featured-media,
-            .featured-video {
-                width: 300px;
-                height: 400px;
-                aspect-ratio: auto;
-                max-height: 400px;
-                object-fit: cover;
-            }
-
-            .featured-overlay {
-                display: none;
-            }
-
-            .news-list {
-                flex: 1;
-                max-height: 400px;
-                overflow-y: auto;
-                border-left: 1px solid #e2e8f0;
-            }
-
-            .widget-container {
-                max-width: 800px;
-            }
+        /* News List Section */
+        .news-list-section {
+            flex: 1;
+            min-width: 0;
+            background: #fafafa;
+            border-left: 1px solid #e2e8f0;
         }
 
-        /* News List - Text only, no images */
         .news-list {
             padding: 0;
+            max-height: 480px;
+            overflow-y: auto;
         }
 
         .news-item {
             display: block;
-            padding: 10px 16px;
+            padding: 4px 10px;
             text-decoration: none;
             color: inherit;
             transition: background 0.2s;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #eee;
         }
 
         .news-item:hover {
-            background: #f8f9fa;
+            background: #f0f0f0;
         }
 
         .news-item:last-child {
@@ -209,19 +272,19 @@
 
         .news-category {
             display: inline-block;
-            font-size: 9px;
-            font-weight: 600;
+            font-size: 8px;
+            font-weight: 500;
             color: #2c5282;
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            margin-bottom: 3px;
+            margin-bottom: 1px;
         }
 
         .news-title {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             color: #1a202c;
-            line-height: 1.35;
+            line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -230,8 +293,9 @@
         }
 
         .news-date {
-            font-size: 10px;
+            font-size: 9px;
             color: #a0aec0;
+            margin-top: 1px;
         }
 
         /* Footer */
@@ -261,50 +325,167 @@
             height: 14px;
         }
 
-        /* Loading */
         .loading {
             padding: 20px;
             text-align: center;
             color: #718096;
             font-size: 13px;
         }
+
+        /* Mobile: Single column with video */
+        @media (max-width: 699px) {
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .featured-section {
+                min-height: 280px;
+            }
+
+            .featured-slides {
+                min-height: 200px;
+            }
+
+            .featured-link {
+                min-height: 280px;
+            }
+
+            .featured-media-wrapper {
+                min-height: 200px;
+            }
+
+            .news-list-section {
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+        }
+
+        /* Desktop: Two columns */
+        @media (min-width: 700px) {
+            .widget-container {
+                max-width: 100%;
+                border-radius: 16px;
+                margin: 12px;
+            }
+
+            .main-layout {
+                flex-direction: row;
+            }
+
+            .featured-section {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .news-list-section {
+                flex: 1;
+                flex-shrink: 0;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .news-list {
+                flex: 1;
+            }
+
+            .featured-link {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                min-height: 0;
+            }
+
+            .featured-media-wrapper {
+                flex: 1;
+                min-height: 0;
+            }
+
+            .featured-content {
+                padding: 10px 14px;
+            }
+
+            .featured-title {
+                font-size: 13px;
+            }
+
+            .featured-excerpt {
+                font-size: 11px;
+            }
+
+            .news-item {
+                padding: 4px 10px;
+            }
+
+            .news-title {
+                font-size: 12px;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1000px) {
+            .widget-container {
+                max-width: 1100px;
+            }
+
+            .featured-title {
+                font-size: 17px;
+            }
+
+            .news-item {
+                padding: 11px 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="widget-container">
-        <!-- Header Banner -->
+        <!-- Header -->
         <header class="widget-header">
             <a href="https://cec.org.co" target="_blank" class="widget-banner">
                 <img src="images/logo.svg" alt="CEC Logo" class="widget-logo" onerror="this.style.display='none'">
                 <div class="widget-title-group">
-                    <div class="widget-title">Noticias CEC</div>
+                    <div class="widget-subtitle">Noticias de la Iglesia en Colombia</div>
                 </div>
             </a>
         </header>
 
-        <!-- Featured News (First with video/image) -->
-        <div class="featured-news" id="featuredNews">
-            <div class="loading">Cargando...</div>
-        </div>
+        <!-- Main Layout: Featured + News List -->
+        <div class="main-layout">
+            <!-- Featured News (Left) -->
+            <div class="featured-section" id="featuredNews">
+                <div class="loading">Cargando...</div>
+            </div>
 
-        <!-- News List (6 items) -->
-        <div class="news-list" id="newsList">
-            <div class="loading">Cargando noticias...</div>
+            <!-- News List (Right) -->
+            <div class="news-list-section">
+                <div class="news-list" id="newsList">
+                    <div class="loading">Cargando noticias...</div>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
         <footer class="widget-footer">
-            <a href="https://cec.org.co/sistema-informativo/" target="_blank" class="footer-link">
+            <a href="https://cec.org.co" target="_blank" class="footer-link">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                 </svg>
-                Ver más en CEC.org.co
+                Ver más en cec.org.co
             </a>
         </footer>
     </div>
 
     <script>
-        // Cargar noticias
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         async function loadNews() {
             try {
                 const response = await fetch('news-data.json');
@@ -313,7 +494,7 @@
             } catch (error) {
                 console.error('Error loading news:', error);
                 document.getElementById('featuredNews').innerHTML = `
-                    <div class="featured-overlay">
+                    <div class="featured-content">
                         <p style="color:#718096;font-size:13px;">Error al cargar. <a href="https://cec.org.co" target="_blank">Visitar CEC.org.co</a></p>
                     </div>
                 `;
@@ -323,67 +504,122 @@
         function renderNews(news) {
             if (!news || news.length === 0) return;
 
-            const featured = news[0];
-            const remaining = news.slice(1, 7);
+            // Get first 2 items with video for carousel
+            const videoItems = news.filter(item => item.video && item.video.includes('youtube.com/embed/')).slice(0, 2);
+            const featuredItems = videoItems.length >= 2 ? videoItems : [news[0]];
+            
+            // Remaining items for text list (excluding featured items)
+            const featuredUrls = featuredItems.map(f => f.url);
+            const remaining = news.filter(item => !featuredUrls.includes(item.url)).slice(0, 6);
 
-            // Render featured (first news) with info below video
-            let featuredHtml = '<div class="featured-container">';
+            // Build carousel slides
+            let slidesHtml = '<div class="featured-slides">';
             
-            // Media wrapper with video/image
-            featuredHtml += '<div class="featured-media-wrapper">';
+            featuredItems.forEach((item, index) => {
+                const hasVideo = item.video && item.video.includes('youtube.com/embed/');
+                const isActive = index === 0 ? ' active' : '';
+                
+                slidesHtml += `<div class="featured-slide${isActive}">`;
+                slidesHtml += `<a href="${escapeHtml(item.url)}" target="_blank" class="featured-link">`;
+                slidesHtml += `<div class="featured-media-wrapper">`;
+                
+                if (hasVideo) {
+                    slidesHtml += `<iframe class="featured-video" src="${escapeHtml(item.video)}?autoplay=0&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+                } else {
+                    slidesHtml += `<img class="featured-media" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x225/e2e8f0/a0aec0?text=CEC'">`;
+                }
+                
+                // Add carousel arrows inside the video wrapper
+                if (featuredItems.length > 1) {
+                    slidesHtml += `
+                        <button class="carousel-arrow carousel-arrow-prev" aria-label="Anterior">
+                            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                        </button>
+                        <button class="carousel-arrow carousel-arrow-next" aria-label="Siguiente">
+                            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                        </button>
+                    `;
+                }
+                
+                slidesHtml += `</div>`;
+                slidesHtml += `
+                    <div class="featured-content">
+                        <span class="featured-category">${escapeHtml(item.category)}</span>
+                        <h2 class="featured-title">${escapeHtml(item.title)}</h2>
+                        <p class="featured-excerpt">${escapeHtml(item.excerpt)}</p>
+                        <span class="featured-date">${escapeHtml(item.date)}</span>
+                    </div>
+                </a>`;
+                slidesHtml += `</div>`;
+            });
             
-            // Mostrar video o imagen
-            if (featured.video && featured.video.trim() !== '') {
-                featuredHtml += `
-                    <iframe 
-                        id="featuredVideo"
-                        class="featured-video"
-                        src="${featured.video}?autoplay=0&rel=0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                `;
-            } else {
-                featuredHtml += `
-                    <img 
-                        class="featured-media" 
-                        src="${featured.image}" 
-                        alt="${featured.title}"
-                        loading="lazy"
-                        onerror="this.src='https://via.placeholder.com/400x500/e2e8f0/a0aec0?text=CEC'">
-                `;
+            slidesHtml += '</div>';
+            
+            document.getElementById('featuredNews').innerHTML = slidesHtml;
+
+            // Start auto-rotation if multiple slides
+            if (featuredItems.length > 1) {
+                startCarousel(featuredItems.length);
             }
-            
-            // Media wrapper - sin botón extra
-            featuredHtml += '</div>';
-            
-            // Info section below video (mobile) / hidden on desktop
-            featuredHtml += `
-                <div class="featured-overlay">
-                    <span class="featured-category">${featured.category}</span>
-                    <h2 class="featured-title">${featured.title}</h2>
-                    <p class="featured-excerpt">${featured.excerpt}</p>
-                    <span class="featured-date">${featured.date}</span>
-                </div>
-            </div>
-            `;
 
-            document.getElementById('featuredNews').innerHTML = featuredHtml;
-
-            // Render news list - text only, no images
+            // News list (Right column) - text only, no thumbnails
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = remaining.map(item => `
-                <a href="${item.url}" target="_blank" class="news-item">
+                <a href="${escapeHtml(item.url)}" target="_blank" class="news-item">
                     <div class="news-content">
-                        <span class="news-category">${item.category}</span>
-                        <h3 class="news-title">${item.title}</h3>
-                        <span class="news-date">${item.date}</span>
+                        <span class="news-category">${escapeHtml(item.category)}</span>
+                        <h3 class="news-title">${escapeHtml(item.title)}</h3>
+                        <span class="news-date">${escapeHtml(item.date)}</span>
                     </div>
                 </a>
             `).join('');
         }
 
-        // Iniciar
+        let carouselInterval = null;
+        let currentSlide = 0;
+
+        function startCarousel(totalSlides) {
+            // Clear existing interval
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+            }
+            
+            // Auto-rotate every 10 seconds
+            carouselInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 10000);
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.featured-slide');
+            
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        // Handle arrow clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.carousel-arrow-prev')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const totalSlides = document.querySelectorAll('.featured-slide').length;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+                startCarousel(totalSlides);
+            }
+            
+            if (e.target.closest('.carousel-arrow-next')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const totalSlides = document.querySelectorAll('.featured-slide').length;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+                startCarousel(totalSlides);
+            }
+        });
+
         loadNews();
     </script>
 </body>
