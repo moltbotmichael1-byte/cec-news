@@ -14,39 +14,33 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f5f5;
             color: #333;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 20px 0;
-            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
 
         .widget-container {
             max-width: 100%;
             width: 100%;
-            margin: 0 auto;
             background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            min-height: 100vh;
         }
 
         /* Header */
         .widget-header {
             background: #fff;
-            padding: 14px 16px;
+            padding: 16px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .widget-banner {
@@ -57,255 +51,156 @@
         }
 
         .widget-logo {
-            height: 36px;
+            height: 40px;
             width: auto;
             flex-shrink: 0;
         }
 
         .widget-title-group {
-            margin-left: 10px;
-        }
-
-        .widget-title {
-            color: #1e3a5f;
-            font-size: 14px;
-            font-weight: 500;
+            margin-left: 12px;
         }
 
         .widget-subtitle {
-            color: #718096;
-            font-size: 10px;
-            font-weight: 400;
-            margin-top: 2px;
+            color: #1e3a5f;
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        /* Main Layout - Desktop: Two columns */
-        .main-layout {
-            display: flex;
-            flex-direction: column;
+        /* Video Section - Static */
+        .video-section {
+            padding: 16px;
+            background: #fafafa;
         }
 
-        /* Featured Section */
-        .featured-section {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .featured-slides {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            flex: 1;
-            min-height: 0;
-        }
-
-        .featured-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        .featured-slide.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .featured-link {
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-            height: 100%;
-        }
-
-        .featured-media-wrapper {
-            flex: 1;
-            min-height: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured-media {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .featured-video {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .featured-content {
-            padding: 8px 12px;
+        .video-card {
             background: #fff;
-            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
         }
 
-        /* Carousel arrows */
-        .carousel-arrow {
+        .video-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+        }
+
+        .video-wrapper iframe {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background: transparent;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: all 0.2s ease;
-            opacity: 0.6;
-            top: 50%;
-            transform: translateY(-50%);
         }
 
-        .carousel-arrow:hover {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.15);
+        .video-content {
+            padding: 12px 16px;
         }
 
-        .carousel-arrow-prev {
-            left: 12px;
-        }
-
-        .carousel-arrow-next {
-            right: 12px;
-        }
-
-        .carousel-arrow svg {
-            width: 24px;
-            height: 24px;
-            fill: rgba(255,255,255,0.95);
-            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
-        }
-
-        .featured-category {
+        .video-category {
             display: inline-block;
             background: #dc2626;
             color: #fff;
-            font-size: 9px;
-            font-weight: 500;
-            padding: 3px 6px;
-            border-radius: 2px;
-            margin-bottom: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .featured-title {
-            font-size: 15px;
+        .video-title {
+            font-size: 16px;
             font-weight: 600;
             color: #1a202c;
             line-height: 1.3;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
-        .featured-excerpt {
-            font-size: 12px;
+        .video-excerpt {
+            font-size: 13px;
             color: #4a5568;
             line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            margin-bottom: 8px;
         }
 
-        .featured-date {
-            font-size: 10px;
+        .video-date {
+            font-size: 11px;
             color: #a0aec0;
-            margin-top: 4px;
         }
 
-        /* News List Section */
-        .news-list-section {
-            flex: 1;
-            min-width: 0;
-            background: #fafafa;
-            border-left: 1px solid #e2e8f0;
+        .video-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .news-list {
+        /* News List */
+        .news-section {
             padding: 0;
-            max-height: 480px;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            overscroll-behavior: contain;
+        }
+
+        .section-title {
+            padding: 16px 16px 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e3a5f;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .news-item {
             display: block;
-            padding: 4px 10px;
+            padding: 14px 16px;
             text-decoration: none;
             color: inherit;
-            transition: background 0.2s;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f0f0f0;
+            background: #fff;
         }
 
-        .news-item:hover {
-            background: #f0f0f0;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-content {
-            width: 100%;
+        .news-item:active {
+            background: #f8f9fa;
         }
 
         .news-category {
             display: inline-block;
             font-size: 10px;
-            font-weight: 500;
-            color: #2c5282;
+            font-weight: 600;
+            color: #dc2626;
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .news-title {
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 15px;
+            font-weight: 500;
             color: #1a202c;
             line-height: 1.35;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .news-date {
             font-size: 11px;
-            color: #a0aec0;
-            margin-top: 2px;
+            color: #718096;
         }
 
         /* Footer */
         .widget-footer {
             background: #f8f9fa;
-            padding: 12px 16px;
+            padding: 16px;
             text-align: center;
             border-top: 1px solid #e2e8f0;
         }
@@ -313,139 +208,55 @@
         .footer-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             color: #2c5282;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
         }
 
-        .footer-link:hover {
+        .footer-link:active {
             color: #1a365d;
         }
 
         .footer-link svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
         }
 
         .loading {
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
             color: #718096;
-            font-size: 13px;
+            font-size: 14px;
         }
 
-        /* Mobile: Single column with video */
-        @media (max-width: 699px) {
-            body {
-                padding: 0;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .widget-container {
-                border-radius: 0;
-                min-height: 100vh;
-            }
-
-            .main-layout {
-                flex-direction: column;
-                height: auto;
-                overflow: visible;
-            }
-
-            .featured-section {
-                min-height: 280px;
-                overflow: visible;
-            }
-
-            .featured-slides {
-                min-height: 200px;
-            }
-
-            .featured-link {
-                min-height: 280px;
-            }
-
-            .featured-media-wrapper {
-                min-height: 200px;
-            }
-
-            .news-list-section {
-                border-left: none;
-                border-top: 1px solid #e2e8f0;
-                overflow: visible;
-            }
-
-            .news-list {
-                max-height: none;
-                overflow-y: visible;
-                -webkit-overflow-scrolling: touch;
-            }
-        }
-
-        /* Desktop: Two columns */
+        /* Desktop */
         @media (min-width: 700px) {
             .widget-container {
-                max-width: 100%;
+                max-width: 800px;
+                margin: 20px auto;
                 border-radius: 16px;
-                margin: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
 
-            .main-layout {
-                flex-direction: row;
-            }
-
-            .featured-section {
-                flex: 1;
+            .video-section {
                 display: flex;
-                flex-direction: column;
-                overflow: hidden;
+                gap: 16px;
+                padding: 20px;
             }
 
-            .news-list-section {
+            .video-card {
                 flex: 1;
-                flex-shrink: 0;
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .news-list {
-                flex: 1;
-            }
-
-            .featured-link {
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-                min-height: 0;
-            }
-
-            .featured-media-wrapper {
-                flex: 1;
-                min-height: 0;
-            }
-
-            .featured-content {
-                padding: 10px 14px;
-            }
-
-            .featured-title {
-                font-size: 13px;
-            }
-
-            .featured-excerpt {
-                font-size: 11px;
+                margin-bottom: 0;
             }
 
             .news-item {
-                padding: 4px 10px;
+                padding: 16px 20px;
             }
 
             .news-title {
-                font-size: 12px;
+                font-size: 16px;
             }
         }
 
@@ -455,12 +266,12 @@
                 max-width: 1100px;
             }
 
-            .featured-title {
-                font-size: 17px;
+            .video-section {
+                padding: 24px;
             }
 
-            .news-item {
-                padding: 11px 14px;
+            .video-title {
+                font-size: 18px;
             }
         }
     </style>
@@ -477,18 +288,16 @@
             </a>
         </header>
 
-        <!-- Main Layout: Featured + News List -->
-        <div class="main-layout">
-            <!-- Featured News (Left) -->
-            <div class="featured-section" id="featuredNews">
-                <div class="loading">Cargando...</div>
-            </div>
+        <!-- Videos Section (Static) -->
+        <div class="video-section" id="videoSection">
+            <div class="loading">Cargando videos...</div>
+        </div>
 
-            <!-- News List (Right) -->
-            <div class="news-list-section">
-                <div class="news-list" id="newsList">
-                    <div class="loading">Cargando noticias...</div>
-                </div>
+        <!-- News List -->
+        <div class="news-section">
+            <div class="section-title">Más noticias</div>
+            <div id="newsList">
+                <div class="loading">Cargando noticias...</div>
             </div>
         </div>
 
@@ -518,10 +327,8 @@
                 renderNews(news);
             } catch (error) {
                 console.error('Error loading news:', error);
-                document.getElementById('featuredNews').innerHTML = `
-                    <div class="featured-content">
-                        <p style="color:#718096;font-size:13px;">Error al cargar. <a href="https://cec.org.co" target="_blank">Visitar CEC.org.co</a></p>
-                    </div>
+                document.getElementById('videoSection').innerHTML = `
+                    <div class="loading">Error al cargar. <a href="https://cec.org.co" target="_blank">Visitar CEC.org.co</a></div>
                 `;
             }
         }
@@ -529,121 +336,49 @@
         function renderNews(news) {
             if (!news || news.length === 0) return;
 
-            // Get first 2 items with video for carousel
+            // Get items with video (max 2)
             const videoItems = news.filter(item => item.video && item.video.includes('youtube.com/embed/')).slice(0, 2);
-            const featuredItems = videoItems.length >= 2 ? videoItems : [news[0]];
             
-            // Remaining items for text list (excluding featured items)
-            const featuredUrls = featuredItems.map(f => f.url);
-            const remaining = news.filter(item => !featuredUrls.includes(item.url)).slice(0, 6);
+            // Remaining items for text list
+            const videoUrls = videoItems.map(v => v.url);
+            const remaining = news.filter(item => !videoUrls.includes(item.url));
 
-            // Build carousel slides
-            let slidesHtml = '<div class="featured-slides">';
+            // Render videos (static, no carousel)
+            const videoSection = document.getElementById('videoSection');
             
-            featuredItems.forEach((item, index) => {
-                const hasVideo = item.video && item.video.includes('youtube.com/embed/');
-                const isActive = index === 0 ? ' active' : '';
-                
-                slidesHtml += `<div class="featured-slide${isActive}">`;
-                slidesHtml += `<a href="${escapeHtml(item.url)}" target="_blank" class="featured-link">`;
-                slidesHtml += `<div class="featured-media-wrapper">`;
-                
-                if (hasVideo) {
-                    slidesHtml += `<iframe class="featured-video" src="${escapeHtml(item.video)}?autoplay=0&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
-                } else {
-                    slidesHtml += `<img class="featured-media" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x225/e2e8f0/a0aec0?text=CEC'">`;
-                }
-                
-                // Add carousel arrows inside the video wrapper
-                if (featuredItems.length > 1) {
-                    slidesHtml += `
-                        <button class="carousel-arrow carousel-arrow-prev" aria-label="Anterior">
-                            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                        </button>
-                        <button class="carousel-arrow carousel-arrow-next" aria-label="Siguiente">
-                            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                        </button>
-                    `;
-                }
-                
-                slidesHtml += `</div>`;
-                slidesHtml += `
-                    <div class="featured-content">
-                        <span class="featured-category">${escapeHtml(item.category)}</span>
-                        <h2 class="featured-title">${escapeHtml(item.title)}</h2>
-                        <p class="featured-excerpt">${escapeHtml(item.excerpt)}</p>
-                        <span class="featured-date">${escapeHtml(item.date)}</span>
-                    </div>
-                </a>`;
-                slidesHtml += `</div>`;
-            });
-            
-            slidesHtml += '</div>';
-            
-            document.getElementById('featuredNews').innerHTML = slidesHtml;
-
-            // Start auto-rotation if multiple slides
-            if (featuredItems.length > 1) {
-                startCarousel(featuredItems.length);
+            if (videoItems.length > 0) {
+                videoSection.innerHTML = videoItems.map(item => `
+                    <a href="${escapeHtml(item.url)}" target="_blank" class="video-card">
+                        <div class="video-wrapper">
+                            <iframe 
+                                src="${escapeHtml(item.video)}?autoplay=0&rel=0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="video-content">
+                            <span class="video-category">${escapeHtml(item.category)}</span>
+                            <h2 class="video-title">${escapeHtml(item.title)}</h2>
+                            <p class="video-excerpt">${escapeHtml(item.excerpt)}</p>
+                            <span class="video-date">${escapeHtml(item.date)}</span>
+                        </div>
+                    </a>
+                `).join('');
+            } else {
+                videoSection.style.display = 'none';
             }
 
-            // News list (Right column) - text only, no thumbnails
+            // Render news list
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = remaining.map(item => `
                 <a href="${escapeHtml(item.url)}" target="_blank" class="news-item">
-                    <div class="news-content">
-                        <span class="news-category">${escapeHtml(item.category)}</span>
-                        <h3 class="news-title">${escapeHtml(item.title)}</h3>
-                        <span class="news-date">${escapeHtml(item.date)}</span>
-                    </div>
+                    <span class="news-category">${escapeHtml(item.category)}</span>
+                    <h3 class="news-title">${escapeHtml(item.title)}</h3>
+                    <span class="news-date">${escapeHtml(item.date)}</span>
                 </a>
             `).join('');
         }
-
-        let carouselInterval = null;
-        let currentSlide = 0;
-
-        function startCarousel(totalSlides) {
-            // Clear existing interval
-            if (carouselInterval) {
-                clearInterval(carouselInterval);
-            }
-            
-            // Auto-rotate every 10 seconds
-            carouselInterval = setInterval(() => {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showSlide(currentSlide);
-            }, 10000);
-        }
-
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.featured-slide');
-            
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-        }
-
-        // Handle arrow clicks
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.carousel-arrow-prev')) {
-                e.preventDefault();
-                e.stopPropagation();
-                const totalSlides = document.querySelectorAll('.featured-slide').length;
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                showSlide(currentSlide);
-                startCarousel(totalSlides);
-            }
-            
-            if (e.target.closest('.carousel-arrow-next')) {
-                e.preventDefault();
-                e.stopPropagation();
-                const totalSlides = document.querySelectorAll('.featured-slide').length;
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showSlide(currentSlide);
-                startCarousel(totalSlides);
-            }
-        });
 
         loadNews();
     </script>
