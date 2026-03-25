@@ -1,0 +1,63 @@
+/* Desktop: Two columns - Compact */
+@media (min-width: 700px) {
+    .widget-container {
+        max-width: 800px !important;
+        border-radius: 12px;
+        margin: 20px auto;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .main-layout {
+        flex-direction: row;
+        min-height: 350px;
+        max-height: 450px;
+    }
+
+    .featured-section {
+        flex: 1;
+        min-height: 350px;
+        max-height: 450px;
+        border-right: 1px solid #e2e8f0;
+        border-left: none;
+    }
+
+    .news-list-section {
+        flex: 1;
+        min-height: 350px;
+        max-height: 450px;
+        overflow-y: auto;
+        border-left: none;
+    }
+
+    .featured-title {
+        font-size: 13px !important;
+    }
+
+    .featured-excerpt {
+        font-size: 11px !important;
+    }
+
+    .news-title {
+        font-size: 12px !important;
+    }
+
+    .news-item {
+        padding: 8px 12px !important;
+    }
+
+    .featured-content {
+        padding: 8px 12px !important;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1000px) {
+    .widget-container {
+        max-width: 900px !important;
+    }
+
+    .main-layout {
+        min-height: 400px;
+        max-height: 500px;
+    }
+}

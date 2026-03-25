@@ -1,0 +1,12 @@
+name = "cec-scraper"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# KV Namespace para almacenar noticias
+[[kv_namespaces]]
+binding = "CEC_NEWS"
+id = "7eeb23a2aaa844d88c7ecb1411725253"
+
+# Cron trigger - cada 30 minutos
+[triggers]
+crons = ["*/30 * * * *"]
