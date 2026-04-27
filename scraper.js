@@ -12,7 +12,7 @@ const path = require('path');
 const BASE_URL = 'https://cec.org.co';
 const OUTPUT_FILE = 'news-data.json';
 const IMAGES_DIR = 'images';
-const MAX_NEWS = 20;
+const MAX_NEWS = 50;
 
 // Crear directorio de imágenes si no existe
 if (!fs.existsSync(IMAGES_DIR)) {

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEC News Widget - Presentación Técnica</title>
+<style>
+  @page {
+    size: A4;
+    margin: 2cm 2.5cm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: #1a1a2e;
+    line-height: 1.7;
+    background: #fff;
+  }
+  
+  /* Cover */
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 3cm;
+    border-radius: 0;
+  }
+  .cover h1 {
+    font-size: 2.8em;
+    margin-bottom: 0.3em;
+    letter-spacing: 2px;
+  }
+  .cover .subtitle {
+    font-size: 1.4em;
+    opacity: 0.9;
+    margin-bottom: 2em;
+  }
+  .cover .tagline {
+    font-size: 1.1em;
+    opacity: 0.7;
+    margin-top: 2em;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 1.5em;
+  }
+  .cover .logo-text {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+  }
+  .cover .date {
+    font-size: 0.9em;
+    opacity: 0.6;
+    margin-top: 1em;
+  }
+
+  /* Content */
+  .content { padding: 0; }
+  
+  h2 {
+    color: #0f3460;
+    font-size: 1.6em;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 3px solid #e94560;
+  }
+  h3 {
+    color: #16213e;
+    font-size: 1.2em;
+    margin-top: 1.3em;
+    margin-bottom: 0.5em;
+  }
+  p { margin-bottom: 0.8em; }
+  
+  .section {
+    page-break-inside: avoid;
+    margin-bottom: 1.5em;
+  }
+  
+  /* Cards */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin: 1em 0;
+  }
+  .feature-card {
+    background: #f8f9fa;
+    border-left: 4px solid #e94560;
+    padding: 1em 1.2em;
+    border-radius: 0 8px 8px 0;
+  }
+  .feature-card h4 {
+    color: #0f3460;
+    margin-bottom: 0.3em;
+  }
+  .feature-card p {
+    font-size: 0.9em;
+    color: #444;
+    margin-bottom: 0;
+  }
+
+  /* Architecture diagram */
+  .arch-box {
+    background: #1a1a2e;
+    color: #0ff;
+    font-family: 'Courier New', monospace;
+    padding: 1.5em;
+    border-radius: 8px;
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin: 1em 0;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* Code */
+  .code-block {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1em;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    margin: 1em 0;
+    overflow-x: auto;
+  }
+  .code-label {
+    background: #0f3460;
+    color: white;
+    padding: 0.3em 0.8em;
+    border-radius: 4px 4px 0 0;
+    font-size: 0.8em;
+    margin-bottom: -1em;
+    display: inline-block;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.95em;
+  }
+  th {
+    background: #0f3460;
+    color: white;
+    padding: 0.8em 1em;
+    text-align: left;
+  }
+  td {
+    padding: 0.7em 1em;
+    border-bottom: 1px solid #eee;
+  }
+  tr:nth-child(even) { background: #f8f9fa; }
+  
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    margin: 1.5em 0;
+  }
+  .stat-box {
+    text-align: center;
+    padding: 1em;
+    background: linear-gradient(135deg, #0f3460, #16213e);
+    color: white;
+    border-radius: 8px;
+  }
+  .stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #e94560;
+  }
+  .stat-label {
+    font-size: 0.85em;
+    opacity: 0.8;
+  }
+
+  /* FAQ */
+  .faq-item {
+    margin-bottom: 1em;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+  .faq-question {
+    font-weight: bold;
+    color: #0f3460;
+    margin-bottom: 0.3em;
+  }
+  .faq-answer {
+    color: #444;
+    font-size: 0.95em;
+  }
+
+  /* Highlight */
+  .highlight {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1em 1.2em;
+    margin: 1em 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* Page break */
+  .page-break { page-break-after: always; }
+
+  /* Footer */
+  .footer {
+    margin-top: 3em;
+    padding-top: 1em;
+    border-top: 2px solid #eee;
+    font-size: 0.85em;
+    color: #666;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="logo-text">📰</div>
+  <h1>CEC News Widget</h1>
+  <div class="subtitle">Noticias de la Iglesia Católica en tiempo real</div>
+  <p style="max-width:500px; opacity:0.85; font-size:1.1em; margin: 1em auto;">
+    Widget embebible que muestra las noticias más recientes de la Conferencia Episcopal de Colombia, actualizándose automáticamente sin intervención humana.
+  </p>
+  <div class="tagline">
+    Presentación Técnica para Comunicadores<br>
+    <span style="font-size:0.8em; opacity:0.6;">Abril 2026</span>
+  </div>
+  <div class="date">Cloudflare Workers + Pages + KV</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- STATS -->
+<div class="section">
+  <h2>📊 En Números</h2>
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-number">14</div>
+      <div class="stat-label">Noticias activas</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">30min</div>
+      <div class="stat-label">Frecuencia de actualización</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">300+</div>
+      <div class="stat-label">Ubicaciones CDN</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">$0</div>
+      <div class="stat-label">Costo de operación</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUE ES -->
+<div class="section">
+  <h2>¿Qué es CEC News Widget?</h2>
+  <p>Es un <strong>componente web embebible</strong> que muestra en tiempo real las noticias publicadas por la Conferencia Episcopal de Colombia (CEC) en su sitio oficial <strong>cec.org.co</strong>.</p>
+  
+  <p>El widget se integra en cualquier sitio web mediante un simple <code>&lt;iframe&gt;</code>, sin necesidad de instalar plugins, frameworks ni dependencias adicionales. Las noticias se actualizan automáticamente cada 30 minutos gracias a un sistema de scraping automatizado ejecutado en la red global de Cloudflare.</p>
+
+  <div class="highlight">
+    <strong>💡 Dato clave:</strong> El widget funciona de forma completamente autónoma. Una vez embebido, no requiere configuración, mantenimiento ni intervención humana. Las noticias aparecen actualizadas sin que nadie tenga que hacer nada.
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- COMO FUNCIONA -->
+<div class="section">
+  <h2>⚙️ ¿Cómo Funciona?</h2>
+  <p>El sistema opera en tres capas que trabajan juntas de forma automática:</p>
+
+  <h3>1. Capa de Recolección — Cloudflare Worker</h3>
+  <p>Un Worker (función serverless) visita el sitio de CEC.org.co cada 30 minutos, extrae las noticias publicadas (títulos, URLs, imágenes, fechas, categorías y videos de YouTube) y las almacena en una base de datos clave-valor distribuida globalmente.</p>
+
+  <h3>2. Capa de Almacenamiento — Cloudflare KV</h3>
+  <p>Las noticias se guardan en Cloudflare KV, una base de datos distribuida en más de 300 ubicaciones globales. Esto significa que cuando el widget solicita las noticias, la respuesta viene del servidor más cercano al usuario, garantizando tiempos de carga inferiores a 50 milisegundos en Colombia.</p>
+
+  <h3>3. Capa de Presentación — Cloudflare Pages</h3>
+  <p>El widget propiamente dicho es una página HTML/CSS/JS alojada en Cloudflare Pages. Cuando un navegador carga el widget, primero intenta obtener las noticias más recientes del Worker; si por alguna razón el Worker no responde, utiliza una copia local de respaldo (fallback) para que el widget nunca se quede en blanco.</p>
+
+  <div class="arch-box">
+  ┌─────────────────────────────────────────────┐
+  │          Cloudflare Cron Trigger             │
+  │          (cada 30 minutos)                  │
+  └──────────────────┬──────────────────────────┘
+                     │ dispara
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │          Cloudflare Worker                   │
+  │          (cec-scraper)                      │
+  │                                             │
+  │  1. Visita CEC.org.co                       │
+  │  2. Extrae títulos, URLs, imágenes          │
+  │  3. Detecta videos de YouTube               │
+  │  4. Organiza por categoría y fecha          │
+  │  5. Guarda todo en KV                       │
+  │  6. Genera news-data.json (fallback)       │
+  └──────────────────┬──────────────────────────┘
+                     │ almacena
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │          Cloudflare KV                       │
+  │          (CEC_NEWS)                         │
+  │                                             │
+  │  • Cache distribuido globalmente            │
+  │  • TTL: 30 minutos                          │
+  │  • 300+ ubicaciones edge                    │
+  └──────────────────┬──────────────────────────┘
+                     │ consulta
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │          Cloudflare Pages                    │
+  │          (cecnews.pages.dev)                │
+  │                                             │
+  │  • widget.html                               │
+  │  • HTML + CSS + JS puro                      │
+  │  • Sin frameworks ni dependencias            │
+  │  • Fallback a news-data.json local           │
+  │  • SSL incluido                              │
+  └─────────────────────────────────────────────┘</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- CARACTERISTICAS -->
+<div class="section">
+  <h2>✅ Características del Widget</h2>
+  
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h4>🔄 Actualización automática</h4>
+      <p>Cada 30 minutos el Worker scrapea CEC.org.co y actualiza las noticias. Cero intervención humana.</p>
+    </div>
+    <div class="feature-card">
+      <h4>📱 Responsive</h4>
+      <p>Se adapta automáticamente a escritorio, tablet y móvil. No requiere configuración adicional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🎥 Video embebido</h4>
+      <p>Noticias con video de YouTube se reproducen directamente dentro del widget, sin salir de la página.</p>
+    </div>
+    <div class="feature-card">
+      <h4>📜 Scroll infinito</h4>
+      <p>Muestra las primeras 6 noticias y carga más automáticamente al hacer scroll hacia abajo.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🏷️ Categorías</h4>
+      <p>Las noticias se organizan en Actualidad, Opinión y Evangelio con etiquetas visibles y diferenciadas.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🛡️ Fallback inteligente</h4>
+      <p>Si el Worker no responde, el widget muestra las últimas noticias cacheadas. Nunca se queda en blanco.</p>
+    </div>
+    <div class="feature-card">
+      <h4>⚡ CDN global</h4>
+      <p>Cloudflare distribuye el contenido desde 300+ ubicaciones. Latencia menor a 50ms en Colombia.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🔒 SSL incluido</h4>
+      <p>HTTPS por defecto. No requiere configuración de certificados ni seguridad adicional.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🚫 Sin dependencias</h4>
+      <p>HTML, CSS y JavaScript puro. No requiere React, Angular, Vue ni ningún framework.</p>
+    </div>
+    <div class="feature-card">
+      <h4>💰 Costo cero</h4>
+      <p>Opera completamente en el free tier de Cloudflare. Sin costo de hosting, mantenimiento ni licencia.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🔗 Enlaces originales</h4>
+      <p>Cada noticia enlaza directamente al artículo original en CEC.org.co. No se redirige a sitios intermedios.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🖼️ Imágenes optimizadas</h4>
+      <p>Las imágenes se cargan desde CEC.org.co con URLs originales, respetando proporciones y calidad.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- COMO EMBEBER -->
+<div class="section">
+  <h2>🔗 Cómo Embeberlo en tu Sitio Web</h2>
+  
+  <p>Integrar el widget es tan simple como copiar y pegar un fragmento de HTML. No necesitas instalar nada, configurar nada ni tener conocimientos técnicos avanzados.</p>
+
+  <h3>Opción 1: Iframe simple (recomendado)</h3>
+  <div class="code-label">HTML</div>
+  <div class="code-block">&lt;iframe 
+  src="https://cecnews.pages.dev/widget" 
+  width="100%" 
+  height="600" 
+  frameborder="0" 
+  style="border:none; border-radius:8px;"&gt;
+&lt;/iframe&gt;</div>
+
+  <h3>Opción 2: Iframe responsive (se adapta al contenedor)</h3>
+  <p>Ideal si necesitas que el widget ocupe proporcionalmente el espacio disponible, manteniendo una relación de aspecto consistente en cualquier dispositivo:</p>
+  <div class="code-label">HTML</div>
+  <div class="code-block">&lt;div style="position:relative; width:100%; padding-bottom:150%;"&gt;
+  &lt;iframe 
+    src="https://cecnews.pages.dev/widget" 
+    style="position:absolute; top:0; left:0; width:100%; height:100%; 
+           border:none; border-radius:8px;"&gt;
+  &lt;/iframe&gt;
+&lt;/div&gt;</div>
+
+  <h3>Opción 3: Enlace directo</h3>
+  <p>Si solo necesitas compartir la URL del widget (para un enlace en un correo, redes sociales, o documento):</p>
+  <div class="code-block">https://cecnews.pages.dev/widget</div>
+
+  <div class="highlight">
+    <strong>💡 Tip para comunicadores:</strong> La Opción 1 funciona en la mayoría de sitios web (WordPress, Wix, Squarespace, Joomla, etc.). Solo pega el código en un bloque HTML o widget personalizado de tu plataforma.
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ESPECIFICACIONES -->
+<div class="section">
+  <h2>📋 Especificaciones Técnicas</h2>
+  
+  <table>
+    <tr>
+      <th>Parámetro</th>
+      <th>Valor</th>
+    </tr>
+    <tr>
+      <td><strong>Fuente de datos</strong></td>
+      <td>CEC.org.co (scraping automatizado)</td>
+    </tr>
+    <tr>
+      <td><strong>Frecuencia de actualización</strong></td>
+      <td>Cada 30 minutos (Cron Trigger de Cloudflare)</td>
+    </tr>
+    <tr>
+      <td><strong>Hosting</strong></td>
+      <td>Cloudflare Pages + Workers</td>
+    </tr>
+    <tr>
+      <td><strong>CDN</strong></td>
+      <td>300+ ubicaciones edge globales</td>
+    </tr>
+    <tr>
+      <td><strong>Latencia estimada en Colombia</strong></td>
+      <td>&lt;50ms</td>
+    </tr>
+    <tr>
+      <td><strong>Tamaño del widget</strong></td>
+      <td>~16KB HTML + fuentes externas (Google Fonts)</td>
+    </tr>
+    <tr>
+      <td><strong>Compatibilidad</strong></td>
+      <td>Todos los navegadores modernos (Chrome, Firefox, Safari, Edge)</td>
+    </tr>
+    <tr>
+      <td><strong>SSL/HTTPS</strong></td>
+      <td>Incluido (Cloudflare)</td>
+    </tr>
+    <tr>
+      <td><strong>Noticias mostradas</strong></td>
+      <td>14 activas (6 visibles + 8 con scroll)</td>
+    </tr>
+    <tr>
+      <td><strong>Categorías</strong></td>
+      <td>Actualidad, Opinión, Evangelio</td>
+    </tr>
+    <tr>
+      <td><strong>Contenido extraído</strong></td>
+      <td>Título, categoría, fecha, imagen, video YouTube, enlace original</td>
+    </tr>
+    <tr>
+      <td><strong>Costo de operación</strong></td>
+      <td>$0 (Cloudflare free tier)</td>
+    </tr>
+    <tr>
+      <td><strong>Mantenimiento requerido</strong></td>
+      <td>Ninguno</td>
+    </tr>
+  </table>
+</div>
+
+<!-- CONTENIDO -->
+<div class="section">
+  <h2>📰 Contenido que Muestra</h2>
+  <p>El widget extrae automáticamente de cada noticia publicada en CEC.org.co los siguientes elementos:</p>
+
+  <table>
+    <tr>
+      <th>Elemento</th>
+      <th>Descripción</th>
+      <th>Ejemplo</th>
+    </tr>
+    <tr>
+      <td><strong>Título</strong></td>
+      <td>Título completo de la noticia</td>
+      <td>"Obispos colombianos llaman a proteger la vida"</td>
+    </tr>
+    <tr>
+      <td><strong>Categoría</strong></td>
+      <td>Sección de CEC donde se publicó</td>
+      <td>Actualidad, Opinión, Evangelio</td>
+    </tr>
+    <tr>
+      <td><strong>Fecha</strong></td>
+      <td>Fecha de publicación</td>
+      <td>23 de abril de 2026</td>
+    </tr>
+    <tr>
+      <td><strong>Imagen</strong></td>
+      <td>Imagen destacada de la noticia</td>
+      <td>Imagen original de CEC.org.co</td>
+    </tr>
+    <tr>
+      <td><strong>Video</strong></td>
+      <td>Video de YouTube (si existe)</td>
+      <td>Reproducción embebida dentro del widget</td>
+    </tr>
+    <tr>
+      <td><strong>Enlace</strong></td>
+      <td>URL directa a la noticia original</td>
+      <td>Link a cec.org.co/noticia-especifica</td>
+    </tr>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- FLUJO DE ACTUALIZACION -->
+<div class="section">
+  <h2>🔄 Flujo de Actualización Detallado</h2>
+  
+  <p>Cada 30 minutos, el sistema ejecuta automáticamente este proceso sin intervención humana:</p>
+
+  <div class="arch-box">  ┌─────────────────────────────────────────────┐
+  │  PASO 1: Cloudflare Cron Trigger            │
+  │  Cada 30 minutos, dispara el Worker          │
+  └──────────────────┬──────────────────────────┘
+                     │
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │  PASO 2: Worker visita CEC.org.co           │
+  │  Realiza HTTP request al sitio oficial       │
+  │  Extrae HTML de la página de noticias        │
+  └──────────────────┬──────────────────────────┘
+                     │
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │  PASO 3: Parsing y extracción                │
+  │  Extrae: títulos, URLs, imágenes, fechas    │
+  │  Detecta videos de YouTube embebidos        │
+  │  Clasifica por categoría                    │
+  │  Genera JSON estructurado                   │
+  └──────────────────┬──────────────────────────┘
+                     │
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │  PASO 4: Almacenamiento en KV                │
+  │  Guarda JSON en Cloudflare KV               │
+  │  Actualiza news-data.json (fallback local)  │
+  │  KV se propaga a 300+ ubicaciones edge      │
+  └──────────────────┬──────────────────────────┘
+                     │
+                     ▼
+  ┌─────────────────────────────────────────────┐
+  │  PASO 5: Widget actualizado                 │
+  │  Al cargar, el widget consulta el Worker    │
+  │  Si el Worker no responde → usa fallback    │
+  │  Renderiza noticias actualizadas             │
+  └─────────────────────────────────────────────┘</div>
+
+  <div class="highlight">
+    <strong>🔄 Redundancia:</strong> El sistema tiene doble respaldo. Si el Worker no responde, el widget usa <code>news-data.json</code> local. Si CEC.org.co está caído, muestra las últimas noticias cacheadas en KV. El widget <strong>nunca se queda en blanco</strong>.
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section">
+  <h2>❓ Preguntas Frecuentes</h2>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Necesito instalar algo en mi sitio web?</div>
+    <div class="faq-answer">No. Solo copia el código iframe y pégalo en tu sitio. Funciona en WordPress, Wix, Squarespace, Joomla, Blogger, y cualquier plataforma que permita insertar HTML.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Las noticias se actualizan solas?</div>
+    <div class="faq-answer">Sí. Cada 30 minutos el sistema automáticamente scrapea CEC.org.co y actualiza el contenido. No necesitas hacer nada manualmente.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Puedo personalizar el diseño del widget?</div>
+    <div class="faq-answer">Actualmente el widget tiene un diseño fijo optimizado para legibilidad y compatibilidad. Si necesitas personalización (colores, logo, tipografía), se puede desarrollar bajo solicitud.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Qué pasa si CEC.org.co se cae?</div>
+    <div class="faq-answer">El widget muestra las últimas noticias cacheadas en Cloudflare KV. Los visitantes siempre verán contenido, nunca una página en blanco. Cuando CEC.org.co vuelva, las noticias se actualizarán en el próximo ciclo de 30 minutos.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Es gratuito?</div>
+    <div class="faq-answer">Sí. Sin costo de operación, hosting, mantenimiento ni licencia. Opera completamente en el free tier de Cloudflare.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Necesita mantenimiento?</div>
+    <div class="faq-answer">No. Funciona 100% automático en Cloudflare. No hay servidores que mantener, bases de datos que respaldar ni actualizaciones que instalar.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Las noticias enlazan al sitio original?</div>
+    <div class="faq-answer">Sí. Cada noticia tiene un enlace directo al artículo completo en CEC.org.co. El widget funciona como escaparate, no reemplaza el sitio original.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Cuántas noticias se muestran?</div>
+    <div class="faq-answer">Actualmente 14 noticias activas. Las primeras 6 se muestran inmediatamente y las restantes se cargan al hacer scroll hacia abajo (scroll infinito).</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">¿Funciona en móviles?</div>
+    <div class="faq-answer">Sí. El widget es completamente responsive. En móvil las noticias se muestran en una columna con scroll vertical, y los videos de YouTube se adaptan al ancho de pantalla.</div>
+  </div>
+</div>
+
+<!-- URLS -->
+<div class="section">
+  <h2>🔗 URLs y Recursos</h2>
+  <table>
+    <tr>
+      <th>Recurso</th>
+      <th>URL</th>
+    </tr>
+    <tr>
+      <td><strong>Widget</strong></td>
+      <td>https://cecnews.pages.dev/widget</td>
+    </tr>
+    <tr>
+      <td><strong>API (JSON)</strong></td>
+      <td>https://cec-scraper.moltbotmichael1.workers.dev</td>
+    </tr>
+    <tr>
+      <td><strong>Fuente original</strong></td>
+      <td>https://cec.org.co</td>
+    </tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>CEC News Widget — Presentación Técnica para Comunicadores</p>
+  <p>Abril 2026 | Cloudflare Workers + Pages + KV</p>
+  <p>Documento generado el 23 de abril de 2026</p>
+</div>
+
+</div>
+</body>
+</html>

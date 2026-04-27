@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias CEC - Conferencia Episcopal de Colombia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        @media (max-width: 400px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                padding: 25px 15px;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .news-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            min-height: 350px;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            object-position: center top;
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .news-image {
+                height: 200px;
+            }
+        }
+
+        /* Imágenes de Opinión (verticales) - mostrar completas sin cortar */
+        .news-card[data-category="Opinión"] .news-image {
+            object-fit: contain;
+            background: #f8fafc;
+        }
+
+        .news-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .news-category {
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .news-date {
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+
+        .news-excerpt {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .news-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+            color: #2c5282;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .news-link:hover {
+            color: #1a365d;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+            background: #000;
+            flex-shrink: 0;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            display: block;
+        }
+
+        /* Featured video - fills container height */
+        .featured .video-container iframe {
+            height: 100%;
+            width: 100%;
+            aspect-ratio: auto;
+        }
+
+        /* Scroll Infinito */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            border-radius: 5px;
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: #1a365d;
+        }
+
+        .container {
+            max-width: 1400px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer a {
+            color: #2c5282;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+            color: rgba(255,255,255,0.3);
+            font-size: 48px;
+        }
+
+        .update-badge {
+            background: #48bb78;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        /* Featured Card (First news with video) - Full width, taller */
+        .news-card.featured {
+            grid-column: 1 / -1;
+            max-width: none;
+        }
+
+        .featured .news-image,
+        .featured .video-container {
+            height: 300px;
+        }
+
+        .featured .news-content {
+            padding: 25px;
+        }
+
+        .featured .news-title {
+            font-size: 1.4rem;
+        }
+
+        .featured .news-excerpt {
+            font-size: 1rem;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            grid-column: 1/-1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/logo.svg" alt="CEC Logo" class="logo" onerror="this.style.display='none'">
+            </div>
+            <p>Noticias de la Iglesia en Colombia</p>
+        </div>
+
+        <div id="news-container" class="news-grid">
+            <div style="text-align: center; padding: 40px; grid-column: 1/-1;">
+                <p style="color: #666;">Cargando noticias...</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Fuente: <a href="https://cec.org.co" target="_blank">cec.org.co</a> |
+            Actualizado: <span id="timestamp">-</span>
+            <span class="update-badge">Automático</span></p>
+        </div>
+    </div>
+
+    <!-- Ver más en CEC.org.co -->
+    <div style="text-align: center; padding: 30px; margin-top: 20px;">
+        <a href="https://cec.org.co/" target="_blank" rel="noopener" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
+            <span style="margin-right: 8px;">➜</span> Ver más en CEC.org.co
+        </a>
+    </div>
+
+    <script>
+        // Cargar noticias desde news-data.json
+        let newsData = [];
+        let currentIndex = 0;
+        const urlParams = new URLSearchParams(window.location.search);
+        const LIMIT = urlParams.has('limit') ? parseInt(urlParams.get('limit')) : null;
+        const INITIAL_LOAD = LIMIT || 6;
+        const LOAD_MORE = LIMIT ? LIMIT : 3;
+
+        async function loadNewsData() {
+            try {
+                // Intentar API dinámica primero
+                let response = await fetch('/api/news');
+                if (!response.ok) {
+                    // Fallback a archivo estático
+                    response = await fetch('news-data.json');
+                }
+                if (!response.ok) throw new Error('No se pudieron cargar las noticias');
+                newsData = await response.json();
+                return true;
+            } catch (error) {
+                console.error('Error cargando noticias:', error);
+                return false;
+            }
+        }
+
+        function renderNews() {
+            const container = document.getElementById('news-container');
+            
+            // Primera carga
+            if (currentIndex === 0) {
+                container.innerHTML = '';
+            }
+            
+            // Cargar siguiente lote de noticias
+            const endIndex = Math.min(currentIndex + (currentIndex === 0 ? INITIAL_LOAD : LOAD_MORE), newsData.length);
+            
+            for (let i = currentIndex; i < endIndex; i++) {
+                const item = newsData[i];
+                const card = document.createElement('div');
+                const isFeatured = i === 0 && item.video;
+                card.className = isFeatured ? 'news-card featured' : 'news-card';
+                card.setAttribute('data-index', i);
+                card.setAttribute('data-category', item.category || 'Actualidad');
+
+                // Si tiene video, mostrar video en lugar de imagen
+                if (item.video) {
+                    card.innerHTML = `
+                        <div class="video-container">
+                            <iframe src="${item.video}?rel=0&modestbranding=1"
+                                    title="${item.title}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">${item.category || 'Actualidad'}</span>
+                                <span class="news-date">${item.date || ''}</span>
+                            </div>
+                            <h3 class="news-title">${item.title}</h3>
+                            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
+                            <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
+                                Leer más →
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}" class="news-image"
+                             onerror="this.outerHTML='<div class=\\'placeholder-image\\'>📰</div>'"
+                             loading="lazy">
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">${item.category || 'Actualidad'}</span>
+                                <span class="news-date">${item.date || ''}</span>
+                            </div>
+                            <h3 class="news-title">${item.title}</h3>
+                            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
+                            <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
+                                Leer más →
+                            </a>
+                        </div>
+                    `;
+                }
+
+                card.onclick = (e) => {
+                    if (e.target.tagName !== 'A' && e.target.tagName !== 'IFRAME') {
+                        window.open(item.url, '_blank');
+                    }
+                };
+
+                container.appendChild(card);
+            }
+
+            currentIndex = endIndex;
+
+            // Mostrar timestamp de actualización
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Añadir indicador de carga si hay más noticias y no hay límite
+            const existingLoader = document.getElementById('load-more-indicator');
+            if (existingLoader) existingLoader.remove();
+            
+            if (currentIndex < newsData.length && !LIMIT) {
+                const loader = document.createElement('div');
+                loader.id = 'load-more-indicator';
+                loader.style.cssText = 'text-align: center; padding: 20px; grid-column: 1/-1; color: #666;';
+                loader.innerHTML = '<p>↓ Desliza para ver más noticias ↓</p>';
+                container.appendChild(loader);
+            }
+        }
+
+        // Intersection Observer para scroll infinito
+        let scrollObserver = null;
+        
+        function setupScrollObserver() {
+            scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && currentIndex < newsData.length) {
+                        const loader = document.getElementById('load-more-indicator');
+                        if (loader) {
+                            loader.remove();
+                            renderNews();
+                            setupScrollObserver();
+                        }
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '200px' 
+            });
+
+            setTimeout(() => {
+                const loader = document.getElementById('load-more-indicator');
+                if (loader) scrollObserver.observe(loader);
+            }, 500);
+        }
+
+        // Inicializar
+        async function init() {
+            const loaded = await loadNewsData();
+            if (loaded && newsData.length > 0) {
+                renderNews();
+                setupScrollObserver();
+            } else {
+                document.getElementById('news-container').innerHTML = `
+                    <div class="error-message">
+                        <p>No se pudieron cargar las noticias.</p>
+                        <p style="margin-top: 10px;"><a href="https://cec.org.co" target="_blank">Visitar CEC.org.co →</a></p>
+                    </div>
+                `;
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

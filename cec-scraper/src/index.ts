@@ -209,7 +209,7 @@ export default {
           const catHtml = await fetchPage('https://cec.org.co' + cat);
           const catLinks = parseHTML(catHtml);
           for (const link of catLinks) {
-            if (!seenUrls.has(link.url) && allLinks.length < 12) {
+            if (!seenUrls.has(link.url) && allLinks.length < 50) {
               seenUrls.add(link.url);
               allLinks.push(link);
             }
@@ -224,7 +224,7 @@ export default {
       // Procesar cada noticia
       const news: NewsItem[] = [];
       
-      for (let i = 0; i < Math.min(allLinks.length, 12); i++) {
+      for (let i = 0; i < Math.min(allLinks.length, 50); i++) {
         const item = allLinks[i];
         console.log(`[${i + 1}/${allLinks.length}] ${item.title.substring(0, 40)}...`);
         

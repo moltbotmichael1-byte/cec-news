@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CEC News - Widget</title>
-<meta name="version" content="1774203098">
+<meta name="version" content="1774630565">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 
         html, body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
+            background: #fff;
             color: #333;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
@@ -33,12 +33,11 @@
         }
 
         body {
-            min-height: 100vh;
-            overflow-y: auto;
+            background: #fff;
         }
 
         .widget-container {
-            max-width: 900px !important;
+            max-width: 100% !important;
             width: 100%;
             margin: 0 auto;
             background: #fff;
@@ -47,7 +46,7 @@
         /* Header */
         .widget-header {
             background: #fff;
-            padding: 14px 16px;
+            padding: 8px 16px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -78,19 +77,23 @@
             margin-top: 2px;
         }
 
-        /* Main Layout - Desktop: Two columns by default */
-        .main-layout {
-            display: flex;
-            flex-direction: row;
-        }
-
         /* Center widget container */
         .widget-container {
             margin: 0 auto;
         }
 
-        /* Mobile: Single column - solo en móviles muy pequeños */
-        @media (max-width: 399px) {
+        .main-layout {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Fix equal height columns */
+        .main-layout > div {
+            align-self: stretch;
+        }
+
+        /* Mobile: Single column - hasta tablet */
+        @media (max-width: 767px) {
             .main-layout {
                 flex-direction: column;
             }
@@ -104,7 +107,6 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
-                border-left: 1px solid #e2e8f0;
         }
 
         /* News List Section - Same height as Featured */
@@ -113,7 +115,14 @@
             min-width: 0;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
+            overflow: hidden;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .news-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .featured-slides {
@@ -138,7 +147,8 @@
         }
 
         .featured-link {
-            display: block;
+            display: flex;
+            flex-direction: column;
             text-decoration: none;
             color: inherit;
         }
@@ -169,8 +179,19 @@
         }
 
         .featured-content {
-            padding: 12px 16px;
+            padding: 20px;
             background: #fff;
+        }
+
+        /* Mobile: Stack video and text vertically */
+        @media (max-width: 767px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .news-list-section {
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
         }
 
         /* Carousel arrows */
@@ -255,6 +276,30 @@
             overflow-y: visible;
         }
 
+        /* Ticker Animation - Right side only */
+        .news-ticker-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .news-ticker {
+            animation: ticker-scroll 30s linear infinite;
+        }
+
+        .news-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
         .news-item {
             display: block;
             padding: 14px 16px;
@@ -328,18 +373,18 @@
             font-size: 11px;
         }
 
-        /* Desktop: Two columns - Compact and Rectangular */
-        @media (min-width: 400px) {
+        /* Desktop: Two columns - tablet y desktop */
+        @media (min-width: 768px) {
             .widget-container {
-                max-width: 1000px !important;
+                max-width: 100% !important;
                 border-radius: 12px;
-                margin: 20px auto !important;
+                margin: 0 auto !important;
             }
 
             .main-layout {
                 flex-direction: row !important;
-                min-height: 320px !important;
-                max-height: 400px !important;
+                align-items: stretch;
+                height: auto;
             }
 
             .featured-section {
@@ -347,16 +392,14 @@
                 display: flex;
                 flex-direction: column;
                 overflow: hidden;
-                min-height: 320px !important;
-                max-height: 400px !important;
             }
 
             .news-list-section {
                 flex: 1 !important;
-                min-height: 320px !important;
-                max-height: 400px !important;
-                overflow-y: scroll !important;
+                overflow-y: auto !important;
                 border-left: 1px solid #e2e8f0;
+                max-height: 100%;
+                align-self: stretch;
             }
 
             /* Scroll visible */
@@ -390,52 +433,53 @@
 
             .featured-media-wrapper {
                 flex: 1;
-                min-height: 180px;
+                min-height: 200px;
+                max-height: 250px;
             }
 
             .featured-content {
-                padding: 10px 14px !important;
+                padding: 12px 14px !important;
             }
 
             .featured-title {
-                font-size: 11px !important;
+                font-size: 13px !important;
                 line-height: 1.3 !important;
             }
 
             .featured-excerpt {
-                font-size: 10px !important;
+                font-size: 11px !important;
                 line-height: 1.4 !important;
-                -webkit-line-clamp: 2;
+                -webkit-line-clamp: 3;
             }
 
             .featured-category {
-                font-size: 8px !important;
-                padding: 2px 5px !important;
+                font-size: 9px !important;
+                padding: 3px 6px !important;
             }
 
             .featured-date {
-                font-size: 9px !important;
+                font-size: 10px !important;
             }
 
             .news-item {
-                padding: 10px 14px !important;
+                padding: 8px 12px !important;
             }
 
             .news-category {
-                font-size: 9px !important;
+                font-size: 8px !important;
             }
 
             .news-title {
                 font-size: 11px !important;
-                line-height: 1.35 !important;
+                line-height: 1.3 !important;
             }
 
             .news-date {
-                font-size: 9px !important;
+                font-size: 8px !important;
             }
 
             .widget-header {
-                padding: 10px 14px !important;
+                padding: 8px 14px !important;
             }
 
             .widget-logo {
@@ -498,20 +542,36 @@
     <script>
         function escapeHtml(text) {
             if (!text) return '';
+            // Primero decodificar entidades HTML existentes
             const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
+            div.innerHTML = text;
+            const decoded = div.textContent;
+            // Luego codificar correctamente para HTML
+            div.textContent = decoded;
+            return div.innerHTML.replace(/'/g, '&#39;');
         }
 
         async function loadNews() {
             try {
-                // Usar API del worker (actualiza automáticamente cada 30 min)
+                // Intentar API del worker primero
                 const response = await fetch('https://cec-scraper.moltbotmichael1.workers.dev');
-                const news = await response.json();
-                renderNews(news);
+                const apiNews = await response.json();
+                
+                // Cargar archivo local para obtener más videos
+                const localResponse = await fetch('news-data.json');
+                const localNews = await localResponse.json();
+                
+                // Combinar: usar videos del archivo local (tiene más)
+                const localVideos = localNews.filter(n => n.video && n.video.includes('youtube.com/embed/'));
+                const apiVideos = apiNews.filter(n => n.video && n.video.includes('youtube.com/embed/'));
+                
+                // Si tenemos más videos locales, usarlos
+                const allNews = localVideos.length > apiVideos.length ? localNews : apiNews;
+                
+                renderNews(allNews);
             } catch (error) {
                 console.error('Error loading news:', error);
-                // Fallback: intentar archivo local
+                // Fallback: archivo local
                 try {
                     const fallbackResponse = await fetch('news-data.json');
                     const news = await fallbackResponse.json();
@@ -529,67 +589,63 @@
         function renderNews(news) {
             if (!news || news.length === 0) return;
 
-            // Get first 2 items with video for carousel
-            const videoItems = news.filter(item => item.video && item.video.includes('youtube.com/embed/')).slice(0, 2);
-            const featuredItems = videoItems.length >= 1 ? videoItems : [news[0]];
+            // Get ALL videos (even older ones) - always show last 3 videos in carousel
+            const videoItems = news.filter(item => item.video && item.video.includes('youtube.com/embed/'));
+            const featuredItems = videoItems.slice(0, 3);
             
-            // Remaining items for text list
+            // Remaining items for text list (exclude videos from list)
             const featuredUrls = featuredItems.map(f => f.url);
-            const remaining = news.filter(item => !featuredUrls.includes(item.url)).slice(0, 6);
+            const remaining = news.filter(item => !featuredUrls.includes(item.url)).slice(0, 7);
 
-            // Build carousel slides
-            let slidesHtml = '<div class="featured-slides">';
-            
-            featuredItems.forEach((item, index) => {
-                const hasVideo = item.video && item.video.includes('youtube.com/embed/');
-                const isActive = index === 0 ? ' active' : '';
+            // Build featured section (always show videos if available)
+            if (featuredItems.length > 0) {
+                let slidesHtml = '<div class="featured-slides">';
                 
-                slidesHtml += `<div class="featured-slide${isActive}">`;
-                slidesHtml += `<a href="${escapeHtml(item.url)}" target="_blank" class="featured-link">`;
-                slidesHtml += `<div class="featured-media-wrapper">`;
-                
-                if (hasVideo) {
+                featuredItems.forEach((item, index) => {
+                    const isActive = index === 0 ? ' active' : '';
+                    
+                    slidesHtml += `<div class="featured-slide${isActive}">`;
+                    slidesHtml += `<a href="${escapeHtml(item.url)}" target="_blank" class="featured-link">`;
+                    slidesHtml += `<div class="featured-media-wrapper">`;
                     slidesHtml += `<iframe class="featured-video" src="${escapeHtml(item.video)}?autoplay=0&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
-                } else {
-                    slidesHtml += `<img class="featured-media" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x225/e2e8f0/a0aec0?text=CEC'">`;
-                }
-                
-                // Add carousel arrows
-                if (featuredItems.length > 1) {
+                    
+                    if (featuredItems.length > 1) {
+                        slidesHtml += `
+                            <button class="carousel-arrow carousel-arrow-prev" aria-label="Anterior">
+                                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                            </button>
+                            <button class="carousel-arrow carousel-arrow-next" aria-label="Siguiente">
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </button>
+                        `;
+                    }
+                    
+                    slidesHtml += `</div>`;
                     slidesHtml += `
-                        <button class="carousel-arrow carousel-arrow-prev" aria-label="Anterior">
-                            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                        </button>
-                        <button class="carousel-arrow carousel-arrow-next" aria-label="Siguiente">
-                            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                        </button>
-                    `;
-                }
+                        <div class="featured-content">
+                            <span class="featured-category">${escapeHtml(item.category)}</span>
+                            <h2 class="featured-title">${escapeHtml(item.title)}</h2>
+                            <p class="featured-excerpt">${escapeHtml(item.excerpt)}</p>
+                            <span class="featured-date">${escapeHtml(item.date)}</span>
+                        </div>
+                    </a>`;
+                    slidesHtml += `</div>`;
+                });
                 
-                slidesHtml += `</div>`;
-                slidesHtml += `
-                    <div class="featured-content">
-                        <span class="featured-category">${escapeHtml(item.category)}</span>
-                        <h2 class="featured-title">${escapeHtml(item.title)}</h2>
-                        <p class="featured-excerpt">${escapeHtml(item.excerpt)}</p>
-                        <span class="featured-date">${escapeHtml(item.date)}</span>
-                    </div>
-                </a>`;
-                slidesHtml += `</div>`;
-            });
-            
-            slidesHtml += '</div>';
-            
-            document.getElementById('featuredNews').innerHTML = slidesHtml;
-
-            // Start auto-rotation if multiple slides
-            if (featuredItems.length > 1) {
-                startCarousel(featuredItems.length);
+                slidesHtml += '</div>';
+                document.getElementById('featuredNews').innerHTML = slidesHtml;
+                
+                // Start autoplay every 10 seconds
+                if (featuredItems.length > 1) {
+                    startCarousel(featuredItems.length);
+                }
+            } else {
+                document.getElementById('featuredNews').innerHTML = '';
             }
 
-            // News list
+            // News list - 7 items static (no ticker)
             const newsList = document.getElementById('newsList');
-            newsList.innerHTML = remaining.map(item => `
+            newsList.innerHTML = remaining.slice(0, 7).map(item => `
                 <a href="${escapeHtml(item.url)}" target="_blank" class="news-item">
                     <div class="news-content">
                         <span class="news-category">${escapeHtml(item.category)}</span>
@@ -642,7 +698,39 @@
             }
         });
 
+        // Equalize heights - responsive
+        function equalizeHeights() {
+            const featured = document.querySelector('.featured-section');
+            const newsList = document.querySelector('.news-list-section');
+            if (featured && newsList) {
+                if (window.innerWidth >= 768) {
+                    // Desktop: equal heights
+                    newsList.style.height = featured.offsetHeight + 'px';
+                    newsList.style.maxHeight = featured.offsetHeight + 'px';
+                } else {
+                    // Mobile: auto height
+                    newsList.style.height = 'auto';
+                    newsList.style.maxHeight = 'none';
+                }
+            }
+        }
+
+        // Observer for dynamic content
+        const observer = new MutationObserver(() => {
+            equalizeHeights();
+        });
+
+        // Initial load
         loadNews();
+
+        // Equalize after content loads and on resize
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                equalizeHeights();
+                observer.observe(document.querySelector('.main-layout'), { childList: true, subtree: true });
+            }, 100);
+        });
+        window.addEventListener('resize', equalizeHeights);
     </script>
 </body>
 </html><!-- Cache bust: 1774175123 -->
