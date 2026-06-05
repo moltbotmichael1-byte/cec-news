@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!-- Cache: 1774175633 -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias CEC - Conferencia Episcopal de Colombia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CEC News - Widget</title>
+<meta name="version" content="1774630565">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,487 +22,721 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #ffffff;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            border: 1px solid #e9ecef;
-        }
-
-        .logo-container {
-            margin-bottom: 20px;
-        }
-
-        .logo {
-            max-width: 300px;
-            width: 100%;
-            height: auto;
-        }
-
-        .header h1 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a365d;
-            margin-bottom: 4px;
-        }
-
-        .header p {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        @media (max-width: 400px) {
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-            .header {
-                padding: 25px 15px;
-            }
-            .header h1 {
-                font-size: 1.5rem;
-            }
-        }
-
-        .news-card {
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #e9ecef;
-            display: flex;
-            flex-direction: column;
-            min-height: 350px;
-        }
-
-        .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            object-position: center top;
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 768px) {
-            .news-image {
-                height: 200px;
-            }
-        }
-
-        /* Imágenes de Opinión (verticales) - mostrar completas sin cortar */
-        .news-card[data-category="Opinión"] .news-image {
-            object-fit: contain;
-            background: #f8fafc;
-        }
-
-        .news-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .news-meta {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 0.85rem;
-            flex-wrap: wrap;
-        }
-
-        .news-category {
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            color: #fff;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .news-date {
-            color: #666;
-            display: flex;
-            align-items: center;
-        }
-
-        .news-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            line-height: 1.4;
-            color: #1a1a2e;
-            margin-bottom: 10px;
-        }
-
-        .news-excerpt {
-            font-size: 0.9rem;
-            color: #555;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-
-        .news-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 15px;
-            color: #2c5282;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .news-link:hover {
-            color: #1a365d;
-        }
-
-        /* Video Container */
-        .video-container {
-            width: 100%;
-            border-radius: 12px 12px 0 0;
-            overflow: hidden;
-            background: #000;
-            flex-shrink: 0;
-        }
-
-        .video-container iframe {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border: none;
-            display: block;
-        }
-
-        /* Featured video - fills container height */
-        .featured .video-container iframe {
-            height: 100%;
-            width: 100%;
-            aspect-ratio: auto;
-        }
-
-        /* Scroll Infinito */
-        html {
-            scroll-behavior: smooth;
+            color: #333;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -webkit-overflow-scrolling: touch;
+            overflow-x: hidden;
         }
 
         body {
-            overflow-x: hidden;
-            overflow-y: auto;
+            background: #fff;
         }
 
-        body::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        body::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 5px;
-        }
-
-        body::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            border-radius: 5px;
-        }
-
-        body::-webkit-scrollbar-thumb:hover {
-            background: #1a365d;
-        }
-
-        .container {
-            max-width: 1400px;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 25px;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .footer a {
-            color: #2c5282;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .placeholder-image {
+        .widget-container {
+            max-width: 100% !important;
             width: 100%;
-            height: 200px;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        /* Header */
+        .widget-header {
+            background: #fff;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .widget-banner {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+        }
+
+        .widget-logo {
+            height: 48px;
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        .widget-title-group {
+            margin-left: 10px;
+        }
+
+        .widget-subtitle {
+            color: #718096;
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* Center widget container */
+        .widget-container {
+            margin: 0 auto;
+        }
+
+        .main-layout {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Fix equal height columns */
+        .main-layout > div {
+            align-self: stretch;
+        }
+
+        /* Mobile: Single column - hasta tablet */
+        @media (max-width: 767px) {
+            .main-layout {
+                flex-direction: column;
+            }
+        }
+
+        /* Featured Section */
+        .featured-section {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* News List Section - Same height as Featured */
+        .news-list-section {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .news-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-slides {
+            position: relative;
+            width: 100%;
+        }
+
+        .featured-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .featured-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .featured-link {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .featured-media-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+
+        .featured-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .featured-content {
+            padding: 20px;
+            background: #fff;
+        }
+
+        /* Mobile: Stack video and text vertically */
+        @media (max-width: 767px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .news-list-section {
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+        }
+
+        /* Carousel arrows */
+        .carousel-arrow {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,0.3);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
-            color: rgba(255,255,255,0.3);
-            font-size: 48px;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .update-badge {
-            background: #48bb78;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+        .carousel-arrow:active {
+            background: rgba(0,0,0,0.5);
+        }
+
+        .carousel-arrow-prev {
+            left: 8px;
+        }
+
+        .carousel-arrow-next {
+            right: 8px;
+        }
+
+        .carousel-arrow svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .featured-category {
+            display: inline-block;
+            background: #dc2626;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 3px 6px;
+            border-radius: 2px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .featured-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a202c;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .featured-excerpt {
+            font-size: 12px;
+            color: #4a5568;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+                border-left: 1px solid #e2e8f0;
+        }
+
+        .featured-date {
+            font-size: 10px;
+            color: #a0aec0;
+            margin-top: 4px;
+        }
+
+        /* News List Section */
+        .news-list-section {
+            background: #fafafa;
+        }
+
+        .news-list {
+            overflow-y: visible;
+        }
+
+        /* Ticker Animation - Right side only */
+        .news-ticker-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .news-ticker {
+            animation: ticker-scroll 30s linear infinite;
+        }
+
+        .news-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .news-item {
+            display: block;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-item:active {
+            background: #f0f0f0;
+        }
+
+        .news-content {
+            width: 100%;
+        }
+
+        .news-category {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            color: #2c5282;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+        }
+
+        .news-title {
+            font-size: 14px;
             font-weight: 500;
-            margin-left: 8px;
+            color: #1a202c;
+            line-height: 1.35;
+            margin-bottom: 3px;
         }
 
-        /* Featured Card (First news with video) - Full width, taller */
-        .news-card.featured {
-            grid-column: 1 / -1;
-            max-width: none;
+        .news-date {
+            font-size: 11px;
+            color: #a0aec0;
         }
 
-        .featured .news-image,
-        .featured .video-container {
-            height: 300px;
-        }
-
-        .featured .news-content {
-            padding: 25px;
-        }
-
-        .featured .news-title {
-            font-size: 1.4rem;
-        }
-
-        .featured .news-excerpt {
-            font-size: 1rem;
-        }
-
-        .error-message {
+        /* Footer */
+        .widget-footer {
+            background: #f8f9fa;
+            padding: 14px 16px;
             text-align: center;
-            padding: 40px;
-            color: #666;
-            grid-column: 1/-1;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #2c5282;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .footer-link:active {
+            color: #1a365d;
+        }
+
+        .footer-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .loading {
+            padding: 20px;
+            text-align: center;
+            color: #718096;
+            font-size: 11px;
+        }
+
+        /* Desktop: Two columns - tablet y desktop */
+        @media (min-width: 768px) {
+            .widget-container {
+                max-width: 100% !important;
+                border-radius: 12px;
+                margin: 0 auto !important;
+            }
+
+            .main-layout {
+                flex-direction: row !important;
+                align-items: stretch;
+                height: auto;
+            }
+
+            .featured-section {
+                flex: 1 !important;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .news-list-section {
+                flex: 1 !important;
+                overflow-y: auto !important;
+                border-left: 1px solid #e2e8f0;
+                max-height: 100%;
+                align-self: stretch;
+            }
+
+            /* Scroll visible */
+            .news-list-section::-webkit-scrollbar {
+                width: 5px;
+            }
+            .news-list-section::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            .news-list-section::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 3px;
+            }
+
+            .featured-slides {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .featured-slide {
+                flex: 1;
+                display: flex;
+            }
+
+            .featured-link {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .featured-media-wrapper {
+                flex: 1;
+                min-height: 200px;
+                max-height: 250px;
+            }
+
+            .featured-content {
+                padding: 12px 14px !important;
+            }
+
+            .featured-title {
+                font-size: 13px !important;
+                line-height: 1.3 !important;
+            }
+
+            .featured-excerpt {
+                font-size: 11px !important;
+                line-height: 1.4 !important;
+                -webkit-line-clamp: 3;
+            }
+
+            .featured-category {
+                font-size: 9px !important;
+                padding: 3px 6px !important;
+            }
+
+            .featured-date {
+                font-size: 10px !important;
+            }
+
+            .news-item {
+                padding: 8px 12px !important;
+            }
+
+            .news-category {
+                font-size: 8px !important;
+            }
+
+            .news-title {
+                font-size: 11px !important;
+                line-height: 1.3 !important;
+            }
+
+            .news-date {
+                font-size: 8px !important;
+            }
+
+            .widget-header {
+                padding: 8px 14px !important;
+            }
+
+            .widget-logo {
+                height: 38px !important;
+            }
+
+            .widget-subtitle {
+                font-size: 9px !important;
+            }
+
+            .widget-footer {
+                padding: 10px 14px !important;
+            }
+
+            .footer-link {
+                font-size: 10px !important;
+            }
         }
     </style>
+<!-- Cache Bust: 1774203057 -->
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <img src="images/logo.svg" alt="CEC Logo" class="logo" onerror="this.style.display='none'">
+    <div class="widget-container">
+        <!-- Header -->
+        <header class="widget-header">
+            <a href="https://cec.org.co" target="_blank" class="widget-banner">
+                <img src="images/logo.svg" alt="CEC Logo" class="widget-logo" onerror="this.style.display='none'">
+                <div class="widget-title-group">
+                    <div class="widget-subtitle">Noticias de la Iglesia Católica</div>
+                </div>
+            </a>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Featured News with Video Carousel -->
+            <div class="featured-section" id="featuredNews">
+                <div class="loading">Cargando...</div>
             </div>
-            <p>Noticias de la Iglesia en Colombia</p>
-        </div>
 
-        <div id="news-container" class="news-grid">
-            <div style="text-align: center; padding: 40px; grid-column: 1/-1;">
-                <p style="color: #666;">Cargando noticias...</p>
+            <!-- News List -->
+            <div class="news-list-section">
+                <div class="news-list" id="newsList">
+                    <div class="loading">Cargando noticias...</div>
+                </div>
             </div>
         </div>
 
-        <div class="footer">
-            <p>Fuente: <a href="https://cec.org.co" target="_blank">cec.org.co</a> |
-            Actualizado: <span id="timestamp">-</span>
-            <span class="update-badge">Automático</span></p>
-        </div>
-    </div>
-
-    <!-- Ver más en CEC.org.co -->
-    <div style="text-align: center; padding: 30px; margin-top: 20px;">
-        <a href="https://cec.org.co/" target="_blank" rel="noopener" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
-            <span style="margin-right: 8px;">➜</span> Ver más en CEC.org.co
-        </a>
+        <!-- Footer -->
+        <footer class="widget-footer">
+            <a href="https://cec.org.co" target="_blank" class="footer-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+                Ver más en cec.org.co
+            </a>
+        </footer>
     </div>
 
     <script>
-        // Cargar noticias desde news-data.json
-        let newsData = [];
-        let currentIndex = 0;
-        const urlParams = new URLSearchParams(window.location.search);
-        const LIMIT = urlParams.has('limit') ? parseInt(urlParams.get('limit')) : null;
-        const INITIAL_LOAD = LIMIT || 6;
-        const LOAD_MORE = LIMIT ? LIMIT : 3;
+        function escapeHtml(text) {
+            if (!text) return '';
+            // Primero decodificar entidades HTML existentes
+            const div = document.createElement('div');
+            div.innerHTML = text;
+            const decoded = div.textContent;
+            // Luego codificar correctamente para HTML
+            div.textContent = decoded;
+            return div.innerHTML.replace(/'/g, '&#39;');
+        }
 
-        async function loadNewsData() {
+        async function loadNews() {
             try {
-                // Intentar API dinámica primero
-                let response = await fetch('/api/news');
-                if (!response.ok) {
-                    // Fallback a archivo estático
-                    response = await fetch('news-data.json');
-                }
-                if (!response.ok) throw new Error('No se pudieron cargar las noticias');
-                newsData = await response.json();
-                return true;
-            } catch (error) {
-                console.error('Error cargando noticias:', error);
-                return false;
-            }
-        }
-
-        function renderNews() {
-            const container = document.getElementById('news-container');
-            
-            // Primera carga
-            if (currentIndex === 0) {
-                container.innerHTML = '';
-            }
-            
-            // Cargar siguiente lote de noticias
-            const endIndex = Math.min(currentIndex + (currentIndex === 0 ? INITIAL_LOAD : LOAD_MORE), newsData.length);
-            
-            for (let i = currentIndex; i < endIndex; i++) {
-                const item = newsData[i];
-                const card = document.createElement('div');
-                const isFeatured = i === 0 && item.video;
-                card.className = isFeatured ? 'news-card featured' : 'news-card';
-                card.setAttribute('data-index', i);
-                card.setAttribute('data-category', item.category || 'Actualidad');
-
-                // Si tiene video, mostrar video en lugar de imagen
-                if (item.video) {
-                    card.innerHTML = `
-                        <div class="video-container">
-                            <iframe src="${item.video}?rel=0&modestbranding=1"
-                                    title="${item.title}"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                    loading="lazy">
-                            </iframe>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-category">${item.category || 'Actualidad'}</span>
-                                <span class="news-date">${item.date || ''}</span>
-                            </div>
-                            <h3 class="news-title">${item.title}</h3>
-                            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
-                            <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
-                                Leer más →
-                            </a>
-                        </div>
-                    `;
-                } else {
-                    card.innerHTML = `
-                        <img src="${item.image}" alt="${item.title}" class="news-image"
-                             onerror="this.outerHTML='<div class=\\'placeholder-image\\'>📰</div>'"
-                             loading="lazy">
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-category">${item.category || 'Actualidad'}</span>
-                                <span class="news-date">${item.date || ''}</span>
-                            </div>
-                            <h3 class="news-title">${item.title}</h3>
-                            ${item.excerpt ? `<p class="news-excerpt">${item.excerpt}</p>` : ''}
-                            <a href="${item.url}" target="_blank" class="news-link" onclick="event.stopPropagation()">
-                                Leer más →
-                            </a>
-                        </div>
-                    `;
-                }
-
-                card.onclick = (e) => {
-                    if (e.target.tagName !== 'A' && e.target.tagName !== 'IFRAME') {
-                        window.open(item.url, '_blank');
-                    }
-                };
-
-                container.appendChild(card);
-            }
-
-            currentIndex = endIndex;
-
-            // Mostrar timestamp de actualización
-            const now = new Date();
-            document.getElementById('timestamp').textContent = now.toLocaleDateString('es-CO', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
-            // Añadir indicador de carga si hay más noticias y no hay límite
-            const existingLoader = document.getElementById('load-more-indicator');
-            if (existingLoader) existingLoader.remove();
-            
-            if (currentIndex < newsData.length && !LIMIT) {
-                const loader = document.createElement('div');
-                loader.id = 'load-more-indicator';
-                loader.style.cssText = 'text-align: center; padding: 20px; grid-column: 1/-1; color: #666;';
-                loader.innerHTML = '<p>↓ Desliza para ver más noticias ↓</p>';
-                container.appendChild(loader);
-            }
-        }
-
-        // Intersection Observer para scroll infinito
-        let scrollObserver = null;
-        
-        function setupScrollObserver() {
-            scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && currentIndex < newsData.length) {
-                        const loader = document.getElementById('load-more-indicator');
-                        if (loader) {
-                            loader.remove();
-                            renderNews();
-                            setupScrollObserver();
+                // API del worker es la fuente principal
+                const response = await fetch('https://cec-scraper.moltbotmichael1.workers.dev');
+                const apiNews = await response.json();
+                
+                // Complementar con videos del archivo local
+                try {
+                    const localResponse = await fetch('news-data.json');
+                    const localNews = await localResponse.json();
+                    const localVideos = localNews.filter(n => n.video && n.video.includes('youtube.com/embed/'));
+                    const videoTitles = new Set(localVideos.map(n => n.title));
+                    // Agregar videos del local que no estén en la API
+                    apiNews.forEach(n => {
+                        const match = localVideos.find(v => v.title === n.title);
+                        if (match && (!n.video || !n.video.includes('youtube.com/embed/'))) {
+                            n.video = match.video;
                         }
-                    }
-                });
-            }, { 
-                threshold: 0.1,
-                rootMargin: '200px' 
-            });
-
-            setTimeout(() => {
-                const loader = document.getElementById('load-more-indicator');
-                if (loader) scrollObserver.observe(loader);
-            }, 500);
-        }
-
-        // Inicializar
-        async function init() {
-            const loaded = await loadNewsData();
-            if (loaded && newsData.length > 0) {
-                renderNews();
-                setupScrollObserver();
-            } else {
-                document.getElementById('news-container').innerHTML = `
-                    <div class="error-message">
-                        <p>No se pudieron cargar las noticias.</p>
-                        <p style="margin-top: 10px;"><a href="https://cec.org.co" target="_blank">Visitar CEC.org.co →</a></p>
-                    </div>
-                `;
+                    });
+                } catch(e) { /* sin videos extras, no importa */ }
+                
+                renderNews(apiNews);
+            } catch (error) {
+                console.error('Error loading news:', error);
+                // Fallback: archivo local
+                try {
+                    const fallbackResponse = await fetch('news-data.json');
+                    const news = await fallbackResponse.json();
+                    renderNews(news);
+                } catch (fallbackError) {
+                    document.getElementById('featuredNews').innerHTML = `
+                        <div class="featured-content">
+                            <p style="color:#718096;font-size:13px;">Error al cargar. <a href="https://cec.org.co" target="_blank">Visitar CEC.org.co</a></p>
+                        </div>
+                    `;
+                }
             }
         }
 
-        init();
+        function renderNews(news) {
+            if (!news || news.length === 0) return;
+
+            // Get ALL videos (even older ones) - always show last 3 videos in carousel
+            const videoItems = news.filter(item => item.video && item.video.includes('youtube.com/embed/'));
+            const featuredItems = videoItems.slice(0, 3);
+            
+            // Remaining items for text list (exclude videos from list)
+            const featuredUrls = featuredItems.map(f => f.url);
+            const remaining = news.filter(item => !featuredUrls.includes(item.url)).slice(0, 7);
+
+            // Build featured section (always show videos if available)
+            if (featuredItems.length > 0) {
+                let slidesHtml = '<div class="featured-slides">';
+                
+                featuredItems.forEach((item, index) => {
+                    const isActive = index === 0 ? ' active' : '';
+                    
+                    slidesHtml += `<div class="featured-slide${isActive}">`;
+                    slidesHtml += `<a href="${escapeHtml(item.url)}" target="_blank" class="featured-link">`;
+                    slidesHtml += `<div class="featured-media-wrapper">`;
+                    slidesHtml += `<iframe class="featured-video" src="${escapeHtml(item.video)}?autoplay=0&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+                    
+                    if (featuredItems.length > 1) {
+                        slidesHtml += `
+                            <button class="carousel-arrow carousel-arrow-prev" aria-label="Anterior">
+                                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                            </button>
+                            <button class="carousel-arrow carousel-arrow-next" aria-label="Siguiente">
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </button>
+                        `;
+                    }
+                    
+                    slidesHtml += `</div>`;
+                    slidesHtml += `
+                        <div class="featured-content">
+                            <span class="featured-category">${escapeHtml(item.category)}</span>
+                            <h2 class="featured-title">${escapeHtml(item.title)}</h2>
+                            <p class="featured-excerpt">${escapeHtml(item.excerpt)}</p>
+                            <span class="featured-date">${escapeHtml(item.date)}</span>
+                        </div>
+                    </a>`;
+                    slidesHtml += `</div>`;
+                });
+                
+                slidesHtml += '</div>';
+                document.getElementById('featuredNews').innerHTML = slidesHtml;
+                
+                // Start autoplay every 10 seconds
+                if (featuredItems.length > 1) {
+                    startCarousel(featuredItems.length);
+                }
+            } else {
+                document.getElementById('featuredNews').innerHTML = '';
+            }
+
+            // News list - 7 items static (no ticker)
+            const newsList = document.getElementById('newsList');
+            newsList.innerHTML = remaining.slice(0, 7).map(item => `
+                <a href="${escapeHtml(item.url)}" target="_blank" class="news-item">
+                    <div class="news-content">
+                        <span class="news-category">${escapeHtml(item.category)}</span>
+                        <h3 class="news-title">${escapeHtml(item.title)}</h3>
+                        <span class="news-date">${escapeHtml(item.date)}</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        let carouselInterval = null;
+        let currentSlide = 0;
+
+        function startCarousel(totalSlides) {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+            }
+            
+            carouselInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 10000);
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.featured-slide');
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        // Handle arrow clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.carousel-arrow-prev')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const totalSlides = document.querySelectorAll('.featured-slide').length;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+                startCarousel(totalSlides);
+            }
+            
+            if (e.target.closest('.carousel-arrow-next')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const totalSlides = document.querySelectorAll('.featured-slide').length;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+                startCarousel(totalSlides);
+            }
+        });
+
+        // Equalize heights - responsive
+        function equalizeHeights() {
+            const featured = document.querySelector('.featured-section');
+            const newsList = document.querySelector('.news-list-section');
+            if (featured && newsList) {
+                if (window.innerWidth >= 768) {
+                    // Desktop: equal heights
+                    newsList.style.height = featured.offsetHeight + 'px';
+                    newsList.style.maxHeight = featured.offsetHeight + 'px';
+                } else {
+                    // Mobile: auto height
+                    newsList.style.height = 'auto';
+                    newsList.style.maxHeight = 'none';
+                }
+            }
+        }
+
+        // Observer for dynamic content
+        const observer = new MutationObserver(() => {
+            equalizeHeights();
+        });
+
+        // Initial load
+        loadNews();
+
+        // Equalize after content loads and on resize
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                equalizeHeights();
+                observer.observe(document.querySelector('.main-layout'), { childList: true, subtree: true });
+            }, 100);
+        });
+        window.addEventListener('resize', equalizeHeights);
     </script>
-</body>
-</html>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0203791843ad460285e736a2ff81f110"}'></script><!-- Cloudflare Pages Analytics --><!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0203791843ad460285e736a2ff81f110"}'></script><!-- Cloudflare Pages Analytics --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a07250107d717a26',t:'MTc4MDY5NTM4NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html><!-- Cache bust: 1774175123 -->
+<!-- Cache purge: 1774175392 -->
+<!-- Purge: 1774175444 -->
